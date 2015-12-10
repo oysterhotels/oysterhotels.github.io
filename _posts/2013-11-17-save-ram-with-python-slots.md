@@ -3,6 +3,7 @@ title: 'Saving 9 GB of RAM with Python&#8217;s __slots__'
 author: Ben
 layout: post
 permalink: /save-ram-with-python-slots/
+wordpress_post_id: 795
 dsq_thread_id:
   - 1974172840
 thesis_thumb_width:

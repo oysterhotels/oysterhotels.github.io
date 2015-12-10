@@ -3,6 +3,7 @@ title: Oyster Shots on the Front End
 author: Alex
 layout: post
 permalink: /oyster-shots-on-the-front-end/
+wordpress_post_id: 80
 dsq_thread_id:
   - 527842039
 categories:

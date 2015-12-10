@@ -3,6 +3,7 @@ title: Welcome to the Oyster Tech Blog
 author: Mike
 layout: post
 permalink: /welcome-to-the-oyster-tech-blog/
+wordpress_post_id: 36
 dsq_thread_id:
   - 530216566
 categories:

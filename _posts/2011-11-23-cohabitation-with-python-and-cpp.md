@@ -3,6 +3,7 @@ title: Cohabitation with Python and C++
 author: Chris
 layout: post
 permalink: /cohabitation-with-python-and-cpp/
+wordpress_post_id: 304
 dsq_thread_id:
   - 527842050
 categories:

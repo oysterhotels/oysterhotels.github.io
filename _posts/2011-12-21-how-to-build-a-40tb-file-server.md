@@ -3,6 +3,7 @@ title: How to build a 40TB file server
 author: Anton
 layout: post
 permalink: /how-to-build-a-40tb-file-server/
+wordpress_post_id: 334
 dsq_thread_id:
   - 526878583
 categories:

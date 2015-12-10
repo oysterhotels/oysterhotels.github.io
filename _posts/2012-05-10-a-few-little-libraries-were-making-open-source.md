@@ -3,6 +3,7 @@ title: 'A few little libraries we&#8217;re making open source'
 author: Ben
 layout: post
 permalink: /a-few-little-libraries-were-making-open-source/
+wordpress_post_id: 713
 dsq_thread_id:
   - 684317081
 categories:

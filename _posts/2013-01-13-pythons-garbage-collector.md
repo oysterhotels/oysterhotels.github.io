@@ -3,6 +3,7 @@ title: 'An arm wrestle with Python&#8217;s garbage collector'
 author: Ben
 layout: post
 permalink: /pythons-garbage-collector/
+wordpress_post_id: 734
 dsq_thread_id:
   - 1031689563
 categories:

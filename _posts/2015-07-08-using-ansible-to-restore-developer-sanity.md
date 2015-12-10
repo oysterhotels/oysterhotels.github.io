@@ -3,6 +3,7 @@ title: Using Ansible to restore developer sanity
 author: Ben
 layout: post
 permalink: /using-ansible-to-restore-developer-sanity/
+wordpress_post_id: 824
 thesis_thumb_width:
   - 66
 thesis_thumb_height:

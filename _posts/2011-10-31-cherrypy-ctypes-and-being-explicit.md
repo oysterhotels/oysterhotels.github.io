@@ -3,6 +3,7 @@ title: CherryPy, ctypes, and being explicit
 author: Ben
 layout: post
 permalink: /cherrypy-ctypes-and-being-explicit/
+wordpress_post_id: 259
 dsq_thread_id:
   - 531842300
 categories:

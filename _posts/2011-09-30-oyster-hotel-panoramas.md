@@ -3,6 +3,7 @@ title: Oyster Hotel Panoramas
 author: Bret
 layout: post
 permalink: /oyster-hotel-panoramas/
+wordpress_post_id: 218
 dsq_thread_id:
   - 534335471
 categories:

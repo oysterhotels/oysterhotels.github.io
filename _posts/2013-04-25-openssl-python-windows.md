@@ -3,6 +3,7 @@ title: 'OpenSSL hangs CPU with Python <= 2.7.3 on Windows'
 author: Ben
 layout: post
 permalink: /openssl-python-windows/
+wordpress_post_id: 772
 dsq_thread_id:
   - 1234586980
 categories:

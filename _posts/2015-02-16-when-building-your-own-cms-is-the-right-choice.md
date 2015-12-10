@@ -3,6 +3,7 @@ title: When Building Your Own CMS is the Right Choice
 author: Alex
 layout: post
 permalink: /when-building-your-own-cms-is-the-right-choice/
+wordpress_post_id: 837
 dsq_thread_id:
   - 3521864604
 categories:
