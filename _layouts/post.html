@@ -12,9 +12,8 @@ layout: default
 <div id="disqus_thread"></div>
 <script>
     var disqus_config = function () {
-        this.page.url = 'http://tech.oyster.com/when-building-your-own-cms-is-the-right-choice/';
-        this.page.identifier = '837 http://tech.oyster.com/?p=837';
-
+        this.page.url = "{{ site.baseurl }}{{ page.url }}";
+        this.page.identifier = "{{ page.url }}";
     };
     (function() {
         var d = document, s = d.createElement('script');
