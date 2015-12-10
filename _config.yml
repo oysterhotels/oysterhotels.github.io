@@ -2,7 +2,6 @@ title: Oyster.com Tech Blog
 description: "Insights from Oyster.com's Engineering Team"
 tagline: "Insights from our engineering team"
 url: http://tech.oyster.com/
-baseurl: /
 paginate: 5
 kramdown:
   input: GFM
