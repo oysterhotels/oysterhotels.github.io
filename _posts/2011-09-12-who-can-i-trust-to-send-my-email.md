@@ -27,7 +27,7 @@ A step up are companies like [MailChimp][2].  $0.50 CPM, but you get a lot of f
 
 Another bump up the pricing ladder takes you to a fellow NYC startup, [Sailthru][3].  They probably have the worst designed website in the industry, but I heard good things about them so I got a demo account and took it for a spin.  They had a simple and powerful REST API that would play nicely with our codebase.  They definitely understood that deliverability is paramount.    There were some rough edges around the product (like the documentation), but I got quick support whenever I had a question.
 
-<div id="attachment_195" class="wp-caption alignnone" style="width: 1024px">
+<div id="attachment_195" class="wp-caption alignnone">
   <a href="http://tech.oyster.com/wp-content/uploads/2011/08/comparison.jpg"><img class="size-large wp-image-195" title="comparison" src="http://tech.oyster.com/wp-content/uploads/2011/08/comparison-1024x404.jpg" alt=""   /></a> 
   <p class="wp-caption-text">
     Which of these companies hired a web designer?
@@ -56,7 +56,7 @@ Besides deliverability, there are a couple key features that make Sailthru work 
 
 We process everything on our side with Cheetah templates and our internationalization code and then send the entire email up to them.  We get all the benefits of the reports, link tracking, and other goodies in Sailthru, but we can leverage our localization tools to build the mail.
 
-<div id="attachment_201" class="wp-caption alignnone" style="width: 811px">
+<div id="attachment_201" class="wp-caption alignnone">
   <a href="http://tech.oyster.com/wp-content/uploads/2011/09/i18n_email.jpg"><img class="size-full wp-image-201 " title="English and Portuguese emails" src="http://tech.oyster.com/wp-content/uploads/2011/09/i18n_email.jpg" alt=""  /></a> 
   <p class="wp-caption-text">
     International emails mean basically all the content changes.
@@ -69,7 +69,7 @@ The issue is how do you get different content for 100,000 people into your email
 
 Every night we build up a file with customized article selections for each user and post it to Sailthru.  A callback lets us know it has been processed and we are ready to start a campaign mail whenever it is convenient for us.  My data fields look like:
 
-<div id="attachment_203" class="wp-caption alignnone" style="width: 978px">
+<div id="attachment_203" class="wp-caption alignnone">
   <a href="http://tech.oyster.com/wp-content/uploads/2011/09/email_vars.jpg"><img class="size-full wp-image-203" title="Email data fields" src="http://tech.oyster.com/wp-content/uploads/2011/09/email_vars.jpg" alt=""   /></a> 
   <p class="wp-caption-text">
     Data fields get populated in Sailthru

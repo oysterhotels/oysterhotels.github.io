@@ -39,7 +39,7 @@ First off, we scale the photos as you resize your browser window using a combina
 
 We also use CSS and JavaScript to resize the photos themselves. Setting the image&#8217;s width to 100% and leaving the height at &#8220;auto&#8221; means the image will fill its container horizontally and maintain its original aspect ratio. Obviously we don&#8217;t want to use the same image file for every possible screen size: using a huge image and scaling it down would add undue page weight, while using a small image and scaling it up would look pretty terrible.
 
-<div id="attachment_122" class="wp-caption aligncenter" style="width: 740px">
+<div id="attachment_122" class="wp-caption aligncenter">
   <a href="http://www.oyster.com/shots/?qa=location%3Ajamaica+beach#image=103161"><img class="size-full wp-image-122" title="pdp-compare" src="http://tech.oyster.com/wp-content/uploads/2011/07/pdp-compare.jpg" alt="A Photo Detail Page for high-resolution display, and low-resolution" /></a> 
   
   <p class="wp-caption-text">
@@ -54,7 +54,7 @@ Conventional wisdom seems to be that you&#8217;re not supposed to scale images i
   1. You serve larger images than are needed: We dealt with this by having multiple sizes and serving the one that most closely matches the current display size.
   2. Browsers don&#8217;t do a good job of scaling images: We found that not to be the case. Rescaling images in a modern browser to a size close to its native resolution yields results that are quite acceptable.
 
-<div id="attachment_99" class="wp-caption aligncenter" style="width: 720px">
+<div id="attachment_99" class="wp-caption aligncenter">
   <img class="size-full wp-image-99" title="Photoshop/Browser Scaling Comparison" src="http://tech.oyster.com/wp-content/uploads/2011/07/size-compare.jpg" alt="One of these images was rescaled in Photoshop using bicubic resampling, one was rescaled in Internet Explorer.  Can you tell which is which?" usemap="#size-compare" /> 
   
   <p class="wp-caption-text">
