@@ -8,7 +8,7 @@ dsq_thread_id:
 categories:
   - Uncategorized
 ---
-[<img class="size-full wp-image-52  alignright" title="Oyster Shots" src="http://tech.oyster.com/wp-content/uploads/2011/07/OysterShots.jpg" alt="" width="390" height="206" />][1]
+[<img class="size-full wp-image-52  alignright" title="Oyster Shots" src="http://tech.oyster.com/wp-content/uploads/2011/07/OysterShots.jpg" alt=""   />][1]
 
 Our recently-launched [Oyster Shots][1] is a new tool you can use to search all of our stunning hotel photos by keyword and hotel attributes (location, rating, and hotel type). So far we have about 300,000 published photos, so there&#8217;s a lot to search. Some examples to get you started: [New York City Restaurants and Bars][2], [Dominican Republic Beaches][3], and [Luxury Hotel Bathrooms][4].
 
@@ -28,7 +28,7 @@ Our tagging isn&#8217;t perfect, of course. One thing it doesn&#8217;t yet handl
 
 ## Autocomplete
 
-<img class="alignleft size-medium wp-image-55" title="Autocomplete results for &quot;Miami P&quot;" src="http://tech.oyster.com/wp-content/uploads/2011/07/MiamiP1-300x247.png" alt="" width="300" height="247" />The first piece of back-end technology you use when doing an Oyster Shots search is the autocomplete. We use Ajax (via jQuery) to fetch the autocomplete results as you type. Results need to come back fast, and our Python backend can handle about 3000 calls per second (though of course you won&#8217;t get that across a real HTTP connection).
+<img class="alignleft size-medium wp-image-55" title="Autocomplete results for &quot;Miami P&quot;" src="http://tech.oyster.com/wp-content/uploads/2011/07/MiamiP1-300x247.png" alt=""   />The first piece of back-end technology you use when doing an Oyster Shots search is the autocomplete. We use Ajax (via jQuery) to fetch the autocomplete results as you type. Results need to come back fast, and our Python backend can handle about 3000 calls per second (though of course you won&#8217;t get that across a real HTTP connection).
 
 An autocomplete lookup uses sorted indexes with Python&#8217;s built-in &#8220;bisect&#8221; module to do a binary search. Each binary search is of course O(log(N)), where N is the total number of items in the index. Python&#8217;s &#8220;bisect&#8221; module has a [fast C version][7] just to speed things up even further.
 
@@ -49,7 +49,7 @@ If your query is &#8220;las vegas&#8221;, both indexes will match to give you La
 
 If there are no results, the autocompleter switches to multi-tag matching mode, which chops words off the end of the query until there are matches (if any), and then combines the first result of that with results from matching on the rest of the query to produce multi-tag matches. For example, if you type &#8220;miami p&#8221;, nothing will match directly, so we combine the first result for &#8220;miami&#8221; with results from &#8220;p&#8221;, giving &#8220;Miami + Pool&#8221;, &#8220;Miami + Presidential Suite&#8221;, etc.
 
-[<img class="  " title="The Sound Pool at The Standard Miami" src="http://images.oyster.com/photos/the-standard-miami-v61730-1440.jpg" alt="" width="691" height="460" />][8] The Sound Pool at The Standard Miami 
+[<img class="  " title="The Sound Pool at The Standard Miami" src="http://images.oyster.com/photos/the-standard-miami-v61730-1440.jpg" alt=""   />][8] The Sound Pool at The Standard Miami 
 
 ## Sorting and searching
 

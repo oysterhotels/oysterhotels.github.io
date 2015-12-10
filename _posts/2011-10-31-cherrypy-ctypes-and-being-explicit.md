@@ -8,7 +8,7 @@ dsq_thread_id:
 categories:
   - Uncategorized
 ---
-[<img class="alignright size-medium wp-image-288" title="CherryPy web framework" src="http://tech.oyster.com/wp-content/uploads/2011/10/cherrypy_logo_big-300x101.png" alt="" width="300" height="101" />][1]Here at [Oyster.com][2] part of our web stack consists of [web.py][3] and [CherryPy][1], and on the whole we&#8217;ve found they&#8217;re fast and stable. However, a little while ago, the CherryPy server started intermittently raising an exception and bombing out &#8212; a WindowsError due to an invalid handle on an [obscure SetHandleInformation() call][4].
+[<img class="alignright size-medium wp-image-288" title="CherryPy web framework" src="http://tech.oyster.com/wp-content/uploads/2011/10/cherrypy_logo_big-300x101.png" alt=""   />][1]Here at [Oyster.com][2] part of our web stack consists of [web.py][3] and [CherryPy][1], and on the whole we&#8217;ve found they&#8217;re fast and stable. However, a little while ago, the CherryPy server started intermittently raising an exception and bombing out &#8212; a WindowsError due to an invalid handle on an [obscure SetHandleInformation() call][4].
 
 ## Auto-restart is not a solution
 

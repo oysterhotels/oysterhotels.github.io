@@ -18,7 +18,7 @@ We&#8217;ve [mentioned before][1] how Oyster.com&#8217;s Python-based web server
 
 Here&#8217;s a screenshot of RAM usage before and after deploying this change on one of our servers:
 
-<img class=" wp-image-801 " alt="RAM usage before and after deploying this change" src="http://tech.oyster.com/wp-content/uploads/2013/11/physical-memory-usage-history.png" width="690" height="224" />
+<img class=" wp-image-801 " alt="RAM usage before and after deploying this change" src="http://tech.oyster.com/wp-content/uploads/2013/11/physical-memory-usage-history.png"   />
 
 We allocate about a million instances of a class like the following:
 

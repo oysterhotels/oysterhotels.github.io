@@ -3,12 +3,18 @@ img {
     border-radius: 0;
 }
 
+img.aligncenter {
+    width: 100%;
+}
+
 img.alignright {
     float: right;
     margin: 0 0 0 1.5rem;
+    max-width: 50%;
 }
 
 img.alignleft {
     float: left;
     margin: 0 1.5rem 0 0;
+    max-width: 50%;
 }

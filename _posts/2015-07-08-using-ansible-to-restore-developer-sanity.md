@@ -24,7 +24,7 @@ It&#8217;s not our idea of fun to worry about buffer sizes and string lengths
 
 Then there was the [NIH][2] distributed file transfer system &#8212; client and server. And our own [diffing][3] library, just for fun. All very worthwhile things for a hotel review website to spend time developing in-house! :-)
 
-[<img class="alignright wp-image-830 size-medium" src="http://tech.oyster.com/wp-content/uploads/2015/02/deployment-249x300.png" alt="Screenshot of our Ansible-based deployment" width="249" height="300" />][4]
+[<img class="alignright wp-image-830 size-medium" src="http://tech.oyster.com/wp-content/uploads/2015/02/deployment-249x300.png" alt="Screenshot of our Ansible-based deployment"  />][4]
 
 Sarcasm aside, this wasn&#8217;t a joke: we replaced more than 20,000 lines of C++ code with about 1000 lines of straight-forward [Ansible][5] scripts. And it really did restore our sanity:
 
@@ -37,7 +37,7 @@ Some teams within TripAdvisor use [Chef][6] for server setup (and other tools 
 
 This is partly due to their agent-based model: Chef, for example, requires a Chef server in between the runner and the nodes, and requires you to install clients (&#8220;agents&#8221;) on each of the nodes you want to control. I think this picture gives a pretty good idea of the number of components involved:
 
-[<img class="aligncenter size-full wp-image-828" src="http://tech.oyster.com/wp-content/uploads/2015/02/chef_diagram.png" alt="Chef Diagram" width="597" height="596" />][9]
+[<img class="aligncenter size-full wp-image-828" src="http://tech.oyster.com/wp-content/uploads/2015/02/chef_diagram.png" alt="Chef Diagram"   />][9]
 
 In contrast, Ansible has basically five parts:
 
@@ -52,7 +52,7 @@ I&#8217;m sure there are advantages and more power available to systems like Ch
   1. You don&#8217;t have to install and maintain clients on each of the nodes. On the nodes, Ansible only requires plain old SSH and Python 2.4+, which are already installed on basically every Linux system under the sun. This also means developers don&#8217;t have to learn a new type of authentication: ordinary SSH keys or passwords work great.
   2. Simple order of execution. Ansible playbooks and plays run from top to bottom, just like a script. The only exception to this is &#8220;handlers&#8221;, which run at the end of a play if something has changed (for example, to reload the web server config).
 
-[<img class="alignright size-medium wp-image-885" src="http://tech.oyster.com/wp-content/uploads/2015/06/tower2_jobstatus-300x186.png" alt="Ansible Tower Screenshot" width="300" height="186" />][10]
+[<img class="alignright size-medium wp-image-885" src="http://tech.oyster.com/wp-content/uploads/2015/06/tower2_jobstatus-300x186.png" alt="Ansible Tower Screenshot"   />][10]
 
 ## Ansible Tower UI
 

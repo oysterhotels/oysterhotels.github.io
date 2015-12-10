@@ -32,7 +32,7 @@ But when the garbage collector does decide to do a full collection, which happen
 
 ## Our solution
 
-<img class="size-full wp-image-757   alignright" title="Response time (ms) vs time, before and after the fix" alt="Response time (ms) vs time, before and after the fix" src="http://tech.oyster.com/wp-content/uploads/2013/01/graph21.png" width="379" height="223" />
+<img class="size-full wp-image-757   alignright" title="Response time (ms) vs time, before and after the fix" alt="Response time (ms) vs time, before and after the fix" src="http://tech.oyster.com/wp-content/uploads/2013/01/graph21.png"   />
 
 So what&#8217;s the solution? We couldn&#8217;t just disable the GC, as we do have some reference cycles that need to be freed, and we can&#8217;t have that memory just leaking. But it&#8217;s a relatively small number of objects, so our short-term fix was to simply to bump up the [collection thresholds][9] by a factor of 1000, reducing the number of full collections so they happen only once in a blue moon.
 

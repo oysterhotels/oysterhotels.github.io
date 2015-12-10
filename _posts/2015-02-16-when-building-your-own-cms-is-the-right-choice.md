@@ -10,13 +10,13 @@ categories:
 ---
 In the latter half of last year, we decided to replace the CMS that powers the content on Oyster.com. Actually we replaced three CMSs with a single one. Oyster is primarily in the business of creating content such as our in-depth hotel [reviews][1], [roundups][2], [slideshows][3], and various other articles that help travelers spend their hard-earned vacation days and dollars wisely. So we knew it was an important task to build the best tool we could to enable our writing and editing staff to put out high quality content easily.
 
-[<img class="aligncenter size-full wp-image-851" src="http://tech.oyster.com/wp-content/uploads/2015/02/content.jpg" alt="content" width="744" height="120" />][4]
+[<img class="aligncenter size-full wp-image-851" src="http://tech.oyster.com/wp-content/uploads/2015/02/content.jpg" alt="content"   />][4]
 
 Obviously we’ve been doing this for a while, so we had tools in place, but we had reached a point where we needed to make a change. As I mentioned above we had three different CMSs that we used: one for hotel reviews, one for articles (both of these were custom), and a WordPress blog for blog posts.
 
 ## Documents and Structure
 
-[<img class=" size-full wp-image-842 alignright" src="http://tech.oyster.com/wp-content/uploads/2015/02/pros-cons.png" alt="Pros, Cons & Bottom Line" width="200" />][5]The custom editors were used for creating structured documents which consisted of a number of sections (such as the Pros, Cons, and Bottom Line sections of our hotel reviews) which in turn consisted of a number of fields. These were stored in a custom text format and any text formatting was stored as wiki markdown. This made it harder than it needed to be to update documents’ structure or create new document types since all the code that parsed and rendered the documents was custom. Also the UIs for the custom editors were due for a good refresh.
+[<img class=" size-full wp-image-842 alignright" src="http://tech.oyster.com/wp-content/uploads/2015/02/pros-cons.png" alt="Pros, Cons & Bottom Line"  />][5]The custom editors were used for creating structured documents which consisted of a number of sections (such as the Pros, Cons, and Bottom Line sections of our hotel reviews) which in turn consisted of a number of fields. These were stored in a custom text format and any text formatting was stored as wiki markdown. This made it harder than it needed to be to update documents’ structure or create new document types since all the code that parsed and rendered the documents was custom. Also the UIs for the custom editors were due for a good refresh.
 
 The WordPress editor presented different problems. WordPress is quite good for producing a nicely formatted bit of text, but what you get when you write a post is a big blob of HTML. Formatting and styles are all mixed in with your content. Also everything is totally static, so if a hotel changes names or closes, or some other piece of information in our hotel database changes, it doesn’t get updated in the blog post. We knew we wanted our blog content to be integrated with the same database used by our hotel reviews so we could more easily surface rich information about hotels and pricing.
 
@@ -75,7 +75,7 @@ I mentioned before that our documents have a well-defined structure, but a JSON 
 
 Well it’s nice to have your document structure defined, but you have to do something with that information. Namely you want to be able to validate your documents and get useful error information when the validation fails. For that we used the Python [jsonschema package][9]. When a writer saves a document in our CMS, it sends a JSON object to the server. The CMS back end validates the document against the relevant schema, and we get back a handy error tree that tells us what went wrong. Since the document structure on the server matches the structure on the CMS UI, it’s not too hard to parse that error tree and match error messages to input fields on the writer’s screen to show them some helpful feedback: “This field is required,” “This is an invalid URL,” and so on.
 
-[<img class="wp-image-858 size-full" src="http://tech.oyster.com/wp-content/uploads/2015/02/errors.png" alt="errors" width="744" />][10] Error Handling 
+[<img class="wp-image-858 size-full" src="http://tech.oyster.com/wp-content/uploads/2015/02/errors.png" alt="errors"  />][10] Error Handling 
 
 ## UI Concerns
 
@@ -85,7 +85,7 @@ To create the document editor, we wrote a healthy amount of JavaScript. Basicall
 
 So let’s say you’ve started writing a new Travel Guide article. What happens is an animated paperclip with eyes pops up and says “I see you’re writing a new Travel Guide, need some help?” Wait no, that’s not what happens.
 
-[<img class="aligncenter size-full wp-image-856" src="http://tech.oyster.com/wp-content/uploads/2015/02/editor-2.png" alt="editor-2" width="744" />][11]
+[<img class="aligncenter size-full wp-image-856" src="http://tech.oyster.com/wp-content/uploads/2015/02/editor-2.png" alt="editor-2"  />][11]
 
 What you’ll see is a mostly blank document with inputs for some top-level fields and then spaces to populate with different Widgets. The toolbar on the right hand side has a list of the relevant Widget types which you can drag into place in the document. All the Widgets can be dragged and dropped in the different places they can go in the Document.
 

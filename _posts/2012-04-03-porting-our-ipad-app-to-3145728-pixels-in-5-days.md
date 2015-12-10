@@ -21,7 +21,7 @@ To minimize issues with the transition to Retina, Apple&#8217;s iOS APIs measure
 <div style="text-align: center;">
   <div style="display: inline-block; margin-right: 1px;">
     <div id="attachment_686" class="wp-caption alignnone" style="width: 360px">
-      <img class="size-full wp-image-686" title="Close-up on a non-Retina device" src="http://tech.oyster.com/wp-content/uploads/2012/04/paris-2c.png" alt="Close-up on a non-Retina device" width="360" height="250" /> 
+      <img class="size-full wp-image-686" title="Close-up on a non-Retina device" src="http://tech.oyster.com/wp-content/uploads/2012/04/paris-2c.png" alt="Close-up on a non-Retina device"   /> 
       
       <p class="wp-caption-text">
         Close-up on a non-Retina device
@@ -31,7 +31,7 @@ To minimize issues with the transition to Retina, Apple&#8217;s iOS APIs measure
   
   <div style="display: inline-block;">
     <div id="attachment_685" class="wp-caption alignnone" style="width: 360px">
-      <img class="size-full wp-image-685" title="The same image on a Retina display" src="http://tech.oyster.com/wp-content/uploads/2012/04/paris-3a.png" alt="The same image on a Retina display" width="360" height="250" /> 
+      <img class="size-full wp-image-685" title="The same image on a Retina display" src="http://tech.oyster.com/wp-content/uploads/2012/04/paris-3a.png" alt="The same image on a Retina display"   /> 
       
       <p class="wp-caption-text">
         The same image on a Retina display
