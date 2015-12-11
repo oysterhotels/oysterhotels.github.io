@@ -31,3 +31,7 @@ img.alignleft {
     margin: 0 1.5rem 0 0;
     max-width: 50%;
 }
+
+.comments {
+    margin-bottom: 2rem;
+}
