@@ -3,7 +3,3 @@ description: "Insights from Oyster.com's Engineering Team"
 tagline: "Insights from our engineering team"
 url: http://tech.oyster.com/
 paginate: 5
-kramdown:
-  input: GFM
-  use_coderay: true
-
