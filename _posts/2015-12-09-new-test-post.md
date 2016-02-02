@@ -3,7 +3,7 @@ title: New Test Post
 author: Ben
 layout: post
 permalink: /new-test-post/
-published: false
+published: true
 ---
 This is a test post.
 
