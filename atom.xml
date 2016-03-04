@@ -16,6 +16,7 @@ layout: null
  </author>
 
  {% for post in site.posts %}
+   {% if not post.draft %}
  <entry>
    <title>{{ post.title | xml_escape }}</title>
    <link href="{{ site.url }}{{ post.url }}"/>
@@ -23,6 +24,7 @@ layout: null
    <id>{{ site.url }}{{ site.baseurl }}{{ post.id }}</id>
    <content type="html">{{ post.content | xml_escape }}</content>
  </entry>
+   {% endif %}
  {% endfor %}
 
 </feed>
