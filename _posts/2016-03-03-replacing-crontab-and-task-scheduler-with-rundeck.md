@@ -57,21 +57,21 @@ Rundeck has a simple scheduling interface that allows you to run a job at a cert
 
 ## SSH support
 
-Rundeck can run jobs locally on the machine Rundeck is installed on, or it can run jobs on remote machines using SSH. For most of our longer-running jobs, we have a single "worker server" that we run jobs on via SSH.
+Rundeck can run jobs locally on the machine Rundeck is installed on, or it can run jobs on remote machines [using SSH](http://rundeck.org/docs/plugins-user-guide/ssh-plugins.html). For most of our longer-running jobs, we have a single "worker server" that we run jobs on via SSH.
 
 Rundeck has good support for multiple "node sources". For example, in our installation, our techops team has set up Rundeck to use our master node list from [Chef](https://www.chef.io/chef/).
 
 
 ## Ad-hoc commands
 
-Rundeck also has a screen where you can run any ad-hoc command against one or more nodes. For example, you might want to check disk usage on a bunch of nodes:
+Rundeck also has a screen where you can run any [ad-hoc command](http://rundeck.org/docs/manual/commands.html) against one or more nodes. For example, you might want to check disk usage on a bunch of nodes:
 
 ![Rundeck ad-hoc commands](/public/images/rundeck-ad-hoc-command.png)
 
 
 ## Source control integration
 
-One of the problems with UIs (like Task Scheduler) is that change tracking is hard or impossible. We wanted to be able to see who did what, and when. As of version 2.6.0, Rundeck has built-in support for source control integration via git. So we hoooked it up to our git repo and now have a changed-tracked log of who did what to the job config.
+One of the problems with UIs (like Task Scheduler) is that change tracking is hard or impossible. We wanted to be able to see who did what, and when. As of version 2.6.0, Rundeck has built-in support for source control integration via git. So we hooked it up to our git repo and now have a changed-tracked log of who did what to the job config.
 
 All the project and job configuration is saved in YAML format, so is fairly easy to read, for example:
 
@@ -99,14 +99,14 @@ All the project and job configuration is saved in YAML format, so is fairly easy
 
 ## Other features
 
-Rundeck has plenty of other features, most of which we're not using:
+Rundeck has plenty of other features, many of which we're not using yet:
 
 * [Node matching](http://rundeck.org/docs/manual/nodes.html) and running jobs against multiple nodes
 * Configurable [job options and multi-step workflows](http://rundeck.org/docs/manual/jobs.html)
 * Other [notifications hooks](http://rundeck.org/docs/developer/notification-plugin.html): web hooks, HipChat, custom plugins
 * [Open source](https://github.com/rundeck/rundeck) on GitHub, and very good [documentation](http://rundeck.org/docs/index.html)
 
-Shout-out to our techops team who set up Rundeck for us and helped with various operational aspects.
+Shout-out to our techops team who set up the Rundeck install for us and helped with various operational aspects.
 
 
 ## We're hiring!
