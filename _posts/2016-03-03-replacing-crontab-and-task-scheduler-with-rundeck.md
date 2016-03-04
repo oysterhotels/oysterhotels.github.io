@@ -111,4 +111,4 @@ Shout-out to our techops team who set up the Rundeck install for us and helped w
 
 ## We're hiring!
 
-If you like good engineering and automation and want to come work for us, [contact us](http://www.oyster.com/about/contact/) or [apply here](http://www.tripadvisor.com/careers/search-jobs?job_category=6&location=19&keywords=)!
+If you like good engineering and automation and want to come work for us, [apply here](http://www.tripadvisor.com/careers/search-jobs?job_category=6&location=19&keywords=)!
