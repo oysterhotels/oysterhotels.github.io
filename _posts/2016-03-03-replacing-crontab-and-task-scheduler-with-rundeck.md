@@ -69,7 +69,7 @@ Rundeck also has a screen where you can run any ad-hoc command against one or mo
 ![Rundeck ad-hoc commands](/public/images/rundeck-ad-hoc-command.png)
 
 
-## Change tracking with source control integration
+## Source control integration
 
 One of the problems with UIs (like Task Scheduler) is that change tracking is hard or impossible. We wanted to be able to see who did what, and when. As of version 2.6.0, Rundeck has built-in support for source control integration via git. So we hoooked it up to our git repo and now have a changed-tracked log of who did what to the job config.
 
