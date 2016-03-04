@@ -3,7 +3,7 @@ title: Replacing crontab and Task Scheduler with Rundeck
 author: Ben
 layout: post
 permalink: /replacing-crontab-and-task-scheduler-with-rundeck/
-published: false
+draft: true
 ---
 
 We like automation here at Oyster: we do one-command [deployments using Ansible](http://tech.oyster.com/using-ansible-to-restore-developer-sanity/) and we run a lot of other automated scripts and ETL processing on various schedules.
