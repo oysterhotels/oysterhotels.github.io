@@ -15,8 +15,8 @@ layout: default
         this.page.url = "{{ site.baseurl }}{{ page.url }}";
 {% if page.wordpress_post_id %}
         this.page.identifier = "{{ page.wordpress_post_id }} http://tech.oyster.com/?p={{ page.wordpress_post_id }}";
-{% else %}
-        this.page.identifier = "{{ page.url }}";
+{% elsif page.disqus_page_identifier %}
+        this.page.identifier = "{{ page.disqus_page_identifier }}";
 {% endif %}
     };
     (function() {
