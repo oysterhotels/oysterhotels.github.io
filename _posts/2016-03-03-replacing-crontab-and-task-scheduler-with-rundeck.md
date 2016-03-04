@@ -83,16 +83,6 @@ All the project and job configuration is saved in YAML format, so is fairly easy
       email:
         attachLog: true
         recipients: errors@oyster.com
-  schedule:
-    month: '*'
-    time:
-      hour: '01'
-      minute: '30'
-      seconds: '0'
-    weekday:
-      day: '*'
-    year: '*'
-  scheduleEnabled: true
   sequence:
     commands:
     - jobref:
