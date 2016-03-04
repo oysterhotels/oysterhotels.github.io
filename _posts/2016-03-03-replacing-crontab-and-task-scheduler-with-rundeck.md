@@ -17,15 +17,15 @@ Enter [Rundeck](http://rundeck.org/). It's a powerful system, though we're only 
 Below are some of the benefits for us.
 
 
-## UI with single-sign-on support
+## UI with single sign-on support
 
-It has a decent UI that supports single sign on, so anyone on our team has automic access to it. This means our analytics team can write ETL scripts and set them up in Rundeck without involving engineering, saving everyone's time.
+Rundeck has a web UI that supports single sign-on, so anyone on our team has automatic access to it. Among other things, this means people on other teams can write ETL scripts and set them up in Rundeck without involving engineering.
 
-The UI is also good for engineering. It allows you to create jobs, run a job, view history, and check job output. Previously to look something up we'd have to hunt through old emails, or SSH/Remote Desktop into a machine and scan through log directories. Big plus.
+The UI is also good for engineering. It allows you to create jobs, run a job, view history, and check job output. Previously to look something up we'd have to hunt through old emails, or SSH or remote into a machine and scan through log directories. Big plus.
 
 ![Rundeck jobs UI](/public/images/rundeck-ui.png)
 
-The UI is definitely better than Windows Task Scheduler (not hard to beat), but I use the term *decent* advisedly. It has a very [made by developers](http://blog.codinghorror.com/this-is-what-happens-when-you-let-developers-create-ui/) feel, with tons of detail upfront, and some common operations like look at recent errors or log output hidden behind several clicks.
+The UI is definitely better than Windows Task Scheduler (not hard to beat), but it's not a stellar example of design. It has a very [made by developers](http://blog.codinghorror.com/this-is-what-happens-when-you-let-developers-create-ui/) feel, with tons of detail upfront, and some common operations like looking at recent errors or log output hidden behind several clicks.
 
 
 ## History and output capturing
