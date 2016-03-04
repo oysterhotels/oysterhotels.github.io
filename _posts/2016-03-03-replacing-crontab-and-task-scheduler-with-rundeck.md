@@ -30,7 +30,7 @@ The UI is definitely better than Windows Task Scheduler (not hard to beat), but 
 
 ## History and output capturing
 
-Rundeck logs all job running activity, making it easy to debug when something went wrong and why. You can filter the activity history by task name, user, success/failure status, or time.
+Rundeck logs all job activity, making it easy to debug when something went wrong and why. You can filter the activity history by task name, user, success/failure status, or time.
 
 Once you've found the relevant run, you can drill down into it and look at all stdout and stderr output from a given command. For example:
 
@@ -39,7 +39,7 @@ Once you've found the relevant run, you can drill down into it and look at all s
 
 ## Success and failure emails
 
-crontab and Windows Task Scheduler have very limited support for this, but with Rundeck it's assumed you'll want it, and very easy to set up. You can tell it to attach stdout/stderr output from the job to the email as an attachment.
+Windows Task Scheduler and crontab have very limited support for this, but with Rundeck it's easily configurable and simple to set up. You can tell it to send stdout/stderr output from the job as an attachment to the email.
 
 Some of our scripts we just want to email on failure, others we want to email on success as well, to keep folks in the loop:
 
@@ -52,7 +52,7 @@ You can customize the subject line using job variables, and you can specify a cu
 
 Rundeck has a simple scheduling interface that allows you to run a job at a certain time every day or on selected days of the week. It also has a more advanced [crontab scheduling option](http://www.quartz-scheduler.org/documentation/quartz-1.x/tutorials/crontrigger) to allow you to run tasks on schedules like "every 15 minutes" or "1:30am every last Friday of the month".
 
-![Rundeck simple scheduling](/public/images/rundeck-ui.png)
+![Rundeck simple scheduling](/public/images/rundeck-simple-scheduling.png)
 
 
 ## SSH support
