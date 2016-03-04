@@ -59,14 +59,14 @@ Rundeck has a simple scheduling interface that allows you to run a job at a cert
 
 Rundeck can run jobs locally on the machine Rundeck is installed on, or it can run jobs on remote machines using SSH. For most of our longer-running jobs, we have a single "worker server" that we run jobs on via SSH.
 
+Rundeck has good support for multiple "node sources". For example, in our installation, our techops team has set up Rundeck to use our master node list from [Chef](https://www.chef.io/chef/).
+
 
 ## Ad-hoc commands
 
-Rundeck also has a screen where you can run any ad-hoc command against one or more nodes. For example, you might want to check disk usage on some nodes:
+Rundeck also has a screen where you can run any ad-hoc command against one or more nodes. For example, you might want to check disk usage on a bunch of nodes:
 
 ![Rundeck ad-hoc commands](/public/images/rundeck-ad-hoc-command.png)
-
-Rundeck has good support for multiple "node sources". For example, in our installation, our techops team has set up Rundeck to use our master node list from [Chef](https://www.chef.io/chef/).
 
 
 ## Change tracking with source control integration
