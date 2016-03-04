@@ -10,9 +10,11 @@ We like automation here at Oyster: we do one-command [deployments using Ansible]
 
 crontab on Linux and Task Scheduler on Windows are fine tools as far as they go. But they're a little too simplistic: difficult to schedule, no retrying, not centralized, you can't customize success or failure emails, almost impossible to get non-engineers to use, etc.
 
+Enter [Rundeck](http://rundeck.org/). It's a powerful system, though we're only using it in "glorified crontab with a web UI" mode, which is a fine way to start. We've now switched most of our cron jobs over to it, and we're working on moving our Windows Task Scheduler jobs as well.
+
 ![Rundeck logo](/public/images/rundeck-logo.png)
 
-Enter [Rundeck](http://rundeck.org/). It's a powerful system, though we're only using it in "glorified crontab with a web UI" mode, which is a fine way to start. We've now switched most of our crontab jobs over to it, and we're working on moving our Windows Task Scheduler jobs as well. Here are some of the benefits for us:
+Below are some of the benefits for us.
 
 
 ## UI with single-sign-on support
