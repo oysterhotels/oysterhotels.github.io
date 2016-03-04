@@ -57,7 +57,7 @@ Rundeck has a simple scheduling interface that allows you to run a job at a cert
 
 ## SSH support
 
-Rundeck can run jobs locally on the machine Rundeck is installed on, or it can run jobs on remote machines using SSH. For most of our longer-running jobs, we have a single "runner" server that we run jobs on via SSH. 
+Rundeck can run jobs locally on the machine Rundeck is installed on, or it can run jobs on remote machines using SSH. For most of our longer-running jobs, we have a single "worker server" that we run jobs on via SSH.
 
 
 ## Ad-hoc commands
