@@ -107,12 +107,16 @@ All the project and job configuration is saved in YAML format, so is fairly easy
 
 ## Other features
 
-Rundeck has plenty of other features we're not using yet, such as:
+Rundeck has plenty of other features, most of which we're not using:
 
-* Node lists
-* Other notifications hooks: web hooks, HipChat
-* TODO
+* [Node matching](http://rundeck.org/docs/manual/nodes.html) and running jobs against multiple nodes
+* Configurable [job options and multi-step workflows](http://rundeck.org/docs/manual/jobs.html)
+* Other [notifications hooks](http://rundeck.org/docs/developer/notification-plugin.html): web hooks, HipChat, custom plugins
+* [Open source](https://github.com/rundeck/rundeck) on GitHub, and very good [documentation](http://rundeck.org/docs/index.html)
 
-Kudos to our techops team who set up Rundeck for us and helped with various operational aspects.
+Shout-out to our techops team who set up Rundeck for us and helped with various operational aspects.
 
-And if you like good engineering and automation and want to come work for us, [contact us](http://www.oyster.com/about/contact/) or [apply here](http://www.tripadvisor.com/careers/search-jobs?job_category=6&location=19&keywords=)!
+
+## We're hiring!
+
+If you like good engineering and automation and want to come work for us, [contact us](http://www.oyster.com/about/contact/) or [apply here](http://www.tripadvisor.com/careers/search-jobs?job_category=6&location=19&keywords=)!
