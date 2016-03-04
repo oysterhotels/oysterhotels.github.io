@@ -6,6 +6,7 @@ permalink: /all-posts/
 
 <ul class="related-posts">
 {% for post in site.posts %}
+  {% if not post.draft %}
  <li>
     <h3>
         <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}
@@ -13,5 +14,6 @@ permalink: /all-posts/
         </a>
     </h3>
 </li>
+  {% endif %}
 {% endfor %}
 </ul>
