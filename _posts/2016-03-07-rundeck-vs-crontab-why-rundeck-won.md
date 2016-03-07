@@ -1,10 +1,8 @@
 ---
-title: Replacing crontab and Task Scheduler with Rundeck
+title: Rundeck vs. Crontab: Why Rundeck won
 author: Ben
 layout: post
-permalink: /replacing-crontab-and-task-scheduler-with-rundeck/
-wordpress_post_id: 900
-disqus_page_identifier: rundeck
+permalink: /rundeck-vs-crontab-why-rundeck-won/
 draft: true
 ---
 
