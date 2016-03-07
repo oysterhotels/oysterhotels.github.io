@@ -1,5 +1,5 @@
 ---
-title: Rundeck vs. Crontab: Why Rundeck won
+title: "Rundeck vs. Crontab: Why Rundeck won"
 author: Ben
 layout: post
 permalink: /rundeck-vs-crontab-why-rundeck-won/
