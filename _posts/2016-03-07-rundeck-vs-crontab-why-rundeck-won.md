@@ -3,7 +3,6 @@ title: "Rundeck vs. Crontab: Why Rundeck won"
 author: Ben
 layout: post
 permalink: /rundeck-vs-crontab-why-rundeck-won/
-draft: true
 ---
 
 We like automation here at Oyster: we do one-command [deployments using Ansible](http://tech.oyster.com/using-ansible-to-restore-developer-sanity/) and we run a lot of other automated scripts and ETL processing on various schedules.
