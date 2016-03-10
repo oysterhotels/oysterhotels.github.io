@@ -13,7 +13,11 @@ layout: default
 <div id="disqus_thread"></div>
 <script>
     var disqus_config = function () {
+{% if page.url == '/test-post/' %}
+        this.page.url = "http://tech.oyster.com/test-post/";
+{% else %}
         this.page.url = "{{ site.baseurl }}{{ page.url }}";
+{% endif %}
 {% if page.wordpress_post_id %}
         this.page.identifier = "{{ page.wordpress_post_id }} http://tech.oyster.com/?p={{ page.wordpress_post_id }}";
 {% elsif page.disqus_page_identifier %}
