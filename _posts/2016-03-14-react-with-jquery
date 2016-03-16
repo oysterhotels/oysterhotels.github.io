@@ -4,6 +4,7 @@ author: Alex
 layout: post
 permalink: /using-react-and-jquery-together/
 disqus_page_identifier: react-jquery
+draft: true
 ---
 
 In this post I'll be covering some tips on how to use React and jQuery together in the same UI.
