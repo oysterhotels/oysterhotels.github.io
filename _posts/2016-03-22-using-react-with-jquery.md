@@ -26,7 +26,7 @@ Let's say you have some piece of UI that gets rendered with jQuery, and you want
 new component written with React. Take a look at your jQuery rendering function. Are you just building up some
 big string of HTML and sticking it in the DOM? Or using some kind of JavaScript template? If your rendering
 is already reasonable functional, i.e. some data goes into your function and some HTML comes out (or gets
-appened to the DOM or whatever) it will be pretty easy to just rewrite in React. So you should probably 
+appended to the DOM or whatever) it will be pretty easy to just rewrite in React. So you should probably 
 just do that and save yourself the inevitable hassle you'll have when something breaks and you have to debug it.
 
 ## Okay so you can't rewrite it
@@ -47,7 +47,7 @@ As an example we'll start by rendering a simple list of products with jQuery. We
 for each product and a button to buy it. Then we'll get into replacing parts of the UI with React.
 
 Our jQuery product list is pretty basic - it takes an array of products and inserts the list into
-\#product-list-container. If the product list is updated, you just call productListJustJquery() again
+\#product-list-container. If the product list is updated, you just call ``productListJustJquery()`` again
 and replace the whole list with a new list.
 
 ```javascript
@@ -152,8 +152,8 @@ render: function(props) {
 }
 ```
 
-# Lifecycle methods
-It's important to get familiar with the various React lifecycle methods.
+# Life cycle methods
+It's important to get familiar with the various React life cycle methods.
 The relevant ones here are ``componentDidMount`` - which is called after the first render, and
 ``componentDidUpdate`` - which is called after subsequent renders. In each of these methods we just call
 ``renderBuyButton``, which uses our reference to the ``button-container`` DOM node to create a brand new buy
