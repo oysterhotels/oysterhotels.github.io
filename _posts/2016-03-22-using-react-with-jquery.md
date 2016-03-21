@@ -34,9 +34,11 @@ For whatever reason you've determined it's not practical to rewrite your jQuery 
 caveat: I think using jQuery and React to manage updates to the **same** DOM elements is a bad idea.
 React is really smart about figuring out how to update the DOM, but that only works if React is the only thing
 doing the updates. So unless you can cleanly separate the DOM elements in your UI so that some **only** get
-updated by React and others **only** get updated by jQuery, I wouldn't try it. So say for instance you're
-going to Render a product list with a React template and then jQuery is going to add and remove CSS classes
-to the list items - this is a bad idea.
+updated by React and others **only** get updated by jQuery, I wouldn't try it. 
+
+So say for instance you're
+going to render a product list with a React template, and then jQuery is going to add and remove CSS classes
+to the list items, and then your React render function might get called again later. This is a bad idea. React will have no idea about the changes that jQuery has made. Some of React's efficiency comes from reusing DOM nodes on the page when things change, rather than always inserting or deleting nodes. If jQuery is making DOM changes that React doesn't know about, some node that gets reused might be in an unexpected state.
 
 One further caveat is that you should only really consider this mixed approach if you're planning to
 *eventually* replace jQuery rendering with React. Using both doesn't make sense long-term, but if you're
@@ -80,7 +82,6 @@ function buyProduct(productId) {
 
 /* -- Just jQuery -- */
 function buyButtonJquery(product) {
-  // add price button to DOM
   var button = $('<button class="buy-button">$' + product.price
     + '</button>');
   
@@ -237,7 +238,7 @@ function buyButtonReact(product, element) {
 }
 ```
 
-I've added the ``componentDidMount`` and ``componentWillUnmount`` with some ``console.logs``. They clearly don't really
+I've added the ``componentDidMount`` and ``componentWillUnmount`` methods with some ``console.logs``. They clearly don't really
 do anything in this component, but in a real component you'll often do something in ``componentDidMount`` - 
 subscribe to event from a Flux store or something - that needs to be cleaned up when the component unmounts.
 We need to make sure these methods still get called at the right times or you risk memory leaks or trying
@@ -265,9 +266,10 @@ products.forEach(function(product) {
 
 After we've inserted the main product list with jQuery, we iterate over the container nodes and use the product
 data to render the buy buttons with React. You can see in the console that ``componentDidMount`` is called for each component.
+
 We might render this product list multiple times, so we need to make sure our ``productListJqueryReact`` function works
 when called repeatedly. jQuery is going to blow away the whole DOM each time which won't give React a chance
-to do it's clean up (calling ``componentWillUnmount``), so we need to manually unmount the React components **before**
+to do its clean up (calling ``componentWillUnmount``), so we need to manually unmount the React components **before**
 we insert a new list with jQuery.
 
 ```javascript
