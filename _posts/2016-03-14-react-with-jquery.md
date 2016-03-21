@@ -166,6 +166,7 @@ renderBuyButton: function() {
 ```
 
 Here's the complete ProductComponent:
+
 ```javascript
 var ProductComponent = React.createClass({
     componentDidMount: function() {
@@ -300,4 +301,4 @@ function productListJqueryReact(products, element) {
 }
 ```
 
---- TODO: Conclusion ---
+--- TODO: Conclusion, code cleanup, spell check ---
