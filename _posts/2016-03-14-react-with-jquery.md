@@ -115,7 +115,7 @@ function productListJustJquery(products, element) {
 # jQuery inside a React component
 We'll start by replacing most of the product list with React but leaving the buy button in jQuery. 
 This is simpler than the inverse - sticking React inside a jQuery UI - so we'll do it first.
-The ProductListComponent is pretty straightforward:
+The ``ProductListComponent`` is pretty straightforward:
 
 ```
 var ProductListComponent = React.createClass({
@@ -133,8 +133,8 @@ var ProductListComponent = React.createClass({
 });
 ```
 
-but in ProductComponent we need some extra
-code to make the call to jQuery. We add an extra button-container element,
+but in ``ProductComponent`` we need some extra
+code to make the call to jQuery. We add an extra ``button-container`` element,
 so that we have somewhere to put the jQuery DOM, and keep a reference to it.
 
 ```
@@ -185,17 +185,22 @@ var ProductComponent = React.createClass({
     this.renderBuyButton();
   },
   render: function(props) {
-    // we need to keep a ref to the button-container so we can update it with jQuery
+    /* we need to keep a ref to the 
+     * button-container so we can update it with jQuery
+     */
     return (
       <li>
         {this.props.product.name}
-        <span className="button-container" ref="buttonContainer"></span>
+        <span className="button-container" 
+          ref="buttonContainer"></span>
       </li>
     );
   },
   renderBuyButton: function() {
     // render the buy button with jQuery
-    $(this.refs.buttonContainer).html(buyButtonJquery(this.props.product));
+    $(this.refs.buttonContainer).html(
+      buyButtonJquery(this.props.product)
+    );
   }
 });
 ```
@@ -214,7 +219,9 @@ var BuyButtonComponent = React.createClass({
   },
   render: function(props) {
     return (
-      <button className="buy-button" onClick={this.onClick}>{this.props.product.price}</button>
+      <button className="buy-button" 
+        onClick={this.onClick}>{this.props.product.price}
+      </button>
     );
   },
   componentWillUnmount: function() {
@@ -244,7 +251,9 @@ to the container component so we can use it later.
 products.forEach(function(product) {
   var item = $('<li>' + product.name + '</li>');
 
-  // add a container element where we'll attach our React component
+  /* add a container element where 
+   * we'll attach our React component
+   */
   var buttonContainer = $('<span class="button-container"></span>');
   // add product data to use in our React component
   buttonContainer.data('product', product);
@@ -282,7 +291,9 @@ function productListJqueryReact(products, element) {
   products.forEach(function(product) {
     var item = $('<li>' + product.name + '</li>');
 
-    // add a container element where we'll attach our React component
+    /* add a container element where 
+     * we'll attach our React component
+     */
     var buttonContainer = $('<span class="button-container"></span>');
     // add product data to use in our React component
     buttonContainer.data('product', product);
@@ -304,7 +315,9 @@ function productListJqueryReact(products, element) {
     var container = $(this);
     var product = container.data('product');
 
-    // React needs a plain, non-jQueryfied DOM element, so we can use plain "this"
+    /* React needs a plain, non-jQueryfied DOM 
+     * element, so we can use plain "this"
+     */
     buyButtonReact(product, this);
   });
 }
