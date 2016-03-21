@@ -42,7 +42,7 @@ One further caveat is that you should only really consider this mixed approach i
 *eventually* replace jQuery rendering with React. Using both doesn't make sense long-term, but if you're
 looking to gradually transition to React, you may have some parts of your UI using both for a while.
 
-## Let's see some code
+## Let's write some code
 As an example we'll start by rendering a simple list of products with jQuery. We'll just show the name
 for each product and a button to buy it. Then we'll get into replacing parts of the UI with React.
 
@@ -54,22 +54,22 @@ and replace the whole list with a new list.
 var products = [
     {
         id: 1,
-        name: "Book",
+        name: 'Book',
         price: 15
     },
     {
         id: 2,
-        name: "Burrito",
+        name: 'Burrito',
         price: 8
     },
     {
         id: 3,
-        name: "Spaceship",
+        name: 'Spaceship',
         price: 999999999
     },
     {
         id: 4,
-        name: "Dinosaur Bones",
+        name: 'Dinosaur Bones',
         price: 5000000
     }
 ];
@@ -111,6 +111,7 @@ function productListJustJquery(products, element) {
 }
 ```
 
+# jQuery inside a React component
 We'll start by replacing most of the product list with React but leaving the buy button in jQuery. 
 This is simpler than the inverse - sticking React inside a jQuery UI - so we'll do it first.
 The ProductListComponent is pretty straightforward:
@@ -164,9 +165,62 @@ renderBuyButton: function() {
 }
 ```
 
+Here's the complete ProductComponent:
+```javascript
+var ProductComponent = React.createClass({
+    componentDidMount: function() {
+        this.renderBuyButton();
+    },
+    componentDidUpdate: function() {
+        this.renderBuyButton();
+    },
+    render: function(props) {
+        // we need to keep a ref to the button-container so we can update it with jQuery
+        return (
+            <li>
+                {this.props.product.name}
+                <span className="button-container" ref="buttonContainer"></span>
+            </li>
+        );
+    },
+    renderBuyButton: function() {
+        // render the buy button with jQuery
+        $(this.refs.buttonContainer).html(buyButtonJquery(this.props.product));
+    }
+});
+```
+
+# React components inside jQuery
 Now we're going to do it the other way and stick some React DOM inside our jQuery DOM. This is a little
-trickier. We'll start with a BuyButtonComponent in React, there's not much to it <code component>. I've 
-added the componentDidMount and componentWillUnmount with some console.logs. They clearly don't really
+trickier. We'll start with a BuyButtonComponent in React, there's not much to it:
+
+```javascript
+var BuyButtonComponent = React.createClass({
+    onClick: function(event) {
+        buyProduct(this.props.product.id);
+    },
+    componentDidMount: function() {
+        console.log('component did mount - stuff to clean up later');
+    },
+    render: function(props) {
+        return (
+            <button className="buy-button" onClick={this.onClick}>{this.props.product.price}</button>
+        );
+    },
+    componentWillUnmount: function() {
+        console.log('about to unmount - clean up stuff here');
+    }
+});
+
+function buyButtonReact(product, element) {
+    ReactDOM.render(
+        <BuyButtonComponent product={product} />,
+        element
+    );
+}
+```
+
+I've added the componentDidMount and componentWillUnmount with some console.logs. They clearly don't really
 do anything in this component, but in a real component you'll often do something in componentDidMount - 
 subscribe to event from a Flux store or something - that needs to be cleaned up when the component unmounts.
 We need to make sure these methods still get called at the right times or you risk memory leaks or trying
@@ -175,10 +229,75 @@ to update a component's state property when it no longer exists (which will thro
 So now we'll alter our jQuery function for rendering the product list to use our new React BuyButton component.
 We'll use the same strategy of adding an extra button-container component here. We also attach the product data
 to the container component so we can use it later.
-<code insert>
+
+```javascript
+products.forEach(function(product) {
+    var item = $('<li>' + product.name + '</li>');
+
+    // add a container element where we'll attach our React component
+    var buttonContainer = $('<span class="button-container"></span>');
+    // add product data to use in our React component
+    buttonContainer.data('product', product);
+
+    item.append(buttonContainer);
+    list.append(item);
+});
+```
+
 After we've inserted the main product list with jQuery, we iterate over the container nodes and use the product
-data to render the buy buttons with React. You can see in the console that componentDidMount for each component.
+data to render the buy buttons with React. You can see in the console that componentDidMount is called for each component.
 We might render this product list multiple times, so we need to make sure our productListJqueryReact function works
 when called repeatedly. jQuery is going to blow away the whole DOM each time which won't give React a chance
-to do it's clean up (calling componentWillUnmount), so we need to manually unmount the React components *before*
-we insert a new list with jQuery <code unmount>.
+to do it's clean up (calling componentWillUnmount), so we need to manually unmount the React components **before**
+we insert a new list with jQuery.
+
+```javascript
+// clean up any mounted React components
+$(element).find('.button-container').each(function() {
+    ReactDOM.unmountComponentAtNode(this);
+});
+```
+
+You can verify in the console that componentWillUnmount is called for each of the buy buttons every time the list is re-rendered. Here's the complete function for rendering the product list:
+
+```javascript
+function productListJqueryReact(products, element) {
+    var list = $('<ul class="product-list"></ul>');
+
+    // clean up any mounted React components
+    $(element).find('.button-container').each(function() {
+        ReactDOM.unmountComponentAtNode(this);
+    });
+
+    products.forEach(function(product) {
+        var item = $('<li>' + product.name + '</li>');
+
+        // add a container element where we'll attach our React component
+        var buttonContainer = $('<span class="button-container"></span>');
+        // add product data to use in our React component
+        buttonContainer.data('product', product);
+
+        item.append(buttonContainer);
+        list.append(item);
+    });
+
+    // replace the existing list if there is one
+    var currentList = $(element).find('.product-list');
+    if (currentList.length) {
+        currentList.replaceWith(list);
+    } else {
+        $(element).append(list);
+    }
+
+    // attach our React components to the containers
+    list.find('.button-container').each(function() {
+        var container = $(this);
+        var product = container.data('product');
+
+        // React needs a plain, non-jQueryfied DOM element, so we can use plain "this"
+        buyButtonReact(product, this);
+    });
+}
+```
+
+--- TODO: Conclusion ---
