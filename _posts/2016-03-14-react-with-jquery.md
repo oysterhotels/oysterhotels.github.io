@@ -47,7 +47,7 @@ As an example we'll start by rendering a simple list of products with jQuery. We
 for each product and a button to buy it. Then we'll get into replacing parts of the UI with React.
 
 Our jQuery product list is pretty basic - it takes an array of products and inserts the list into
-#product-list-container. If the product list is updated, you just call productListJustJquery() again
+\#product-list-container. If the product list is updated, you just call productListJustJquery() again
 and replace the whole list with a new list.
 
 ```javascript
@@ -75,7 +75,7 @@ var products = [
 ];
 
 function buyProduct(productId) {
-    alert('Bought product: ' + productId);
+    // buy the product
 }
 
 /* -- Just jQuery -- */
@@ -113,14 +113,56 @@ function productListJustJquery(products, element) {
 
 We'll start by replacing most of the product list with React but leaving the buy button in jQuery. 
 This is simpler than the inverse - sticking React inside a jQuery UI - so we'll do it first.
-The ProductListComponent is pretty straightforward <code component>, but in ProductComponent we need some extra
-code to make the call to jQuery. We add an extra button-container element
-so that we have somewhere to put the jQuery DOM and keep a reference to it <code render>.
+The ProductListComponent is pretty straightforward:
+
+```javascript
+var ProductListComponent = React.createClass({
+    render: function(props) {
+        return (
+            <ul className="product-list">
+                {this.props.products.map(function(product) {
+                    return <ProductComponent key={product.id} product={product} />
+                })}
+            </ul>
+        );
+    }
+});
+```
+
+but in ProductComponent we need some extra
+code to make the call to jQuery. We add an extra button-container element,
+so that we have somewhere to put the jQuery DOM, and keep a reference to it.
+
+```javascript
+render: function(props) {
+    // we need to keep a ref to the button-container so we can update it with jQuery
+    return (
+        <li>
+            {this.props.product.name}
+            <span className="button-container" ref="buttonContainer"></span>
+        </li>
+    );
+},
+```
+# Lifecycle methods
 It's important to get familiar with the various React lifecycle methods.
 The relevant ones here are componentDidMount - which is called after the first render, and
 componentDidUpdate - which is called after subsequent renders. In each of these methods we just call
 renderBuyButton, which uses our reference to the button-container DOM node to create a brand new buy
-button with jQuery on each render <code methods>.
+button with jQuery on each render.
+
+```javascript
+componentDidMount: function() {
+    this.renderBuyButton();
+},
+componentDidUpdate: function() {
+    this.renderBuyButton();
+},
+renderBuyButton: function() {
+    // render the buy button with jQuery
+    $(this.refs.buttonContainer).html(buyButtonJquery(this.props.product));
+}
+```
 
 Now we're going to do it the other way and stick some React DOM inside our jQuery DOM. This is a little
 trickier. We'll start with a BuyButtonComponent in React, there's not much to it <code component>. I've 
