@@ -52,62 +52,63 @@ and replace the whole list with a new list.
 
 ```javascript
 var products = [
-    {
-        id: 1,
-        name: 'Book',
-        price: 15
-    },
-    {
-        id: 2,
-        name: 'Burrito',
-        price: 8
-    },
-    {
-        id: 3,
-        name: 'Spaceship',
-        price: 999999999
-    },
-    {
-        id: 4,
-        name: 'Dinosaur Bones',
-        price: 5000000
-    }
+  {
+    id: 1,
+    name: 'Book',
+    price: 15
+  },
+  {
+    id: 2,
+    name: 'Burrito',
+    price: 8
+  },
+  {
+    id: 3,
+    name: 'Spaceship',
+    price: 999999999
+  },
+  {
+    id: 4,
+    name: 'Dinosaur Bones',
+    price: 5000000
+  }
 ];
 
 function buyProduct(productId) {
-    // buy the product
+  // buy the product
 }
 
 /* -- Just jQuery -- */
 function buyButtonJquery(product) {
-    // add price button to DOM
-    var button = $('<button class="buy-button">$' + product.price + '</button>');
-    
-    // handle click event
-    $(button).on('click', function(event) {
-        event.preventDefault();
-        buyProduct(product.id);
-    });
+  // add price button to DOM
+  var button = $('<button class="buy-button">$' + product.price
+    + '</button>');
+  
+  // handle click event
+  $(button).on('click', function(event) {
+    event.preventDefault();
+    buyProduct(product.id);
+  });
 
-    return button;
+  return button;
 }
 
 function productListJustJquery(products, element) {
-    var list = $('<ul class="product-list"></ul>');
+  var list = $('<ul class="product-list"></ul>');
 
-    products.forEach(function(product) {
-        var item = $('<li>' + product.name + '</li>');
-        item.append(buyButtonJquery(product));
-        list.append(item);
-    });
+  products.forEach(function(product) {
+    var item = $('<li>' + product.name + '</li>');
+    item.append(buyButtonJquery(product));
+    list.append(item);
+  });
 
-    // replace the existing list if there is one
-    var currentList = $(element).find('.product-list');
-    if (currentList.length) {
-        currentList.replaceWith(list);
-    } else {
-        $(element).append(list);
-    }
+  // replace the existing list if there is one
+  var currentList = $(element).find('.product-list');
+  if (currentList.length) {
+    currentList.replaceWith(list);
+  } else {
+    $(element).append(list);
+  }
 }
 ```
 
@@ -116,17 +117,17 @@ We'll start by replacing most of the product list with React but leaving the buy
 This is simpler than the inverse - sticking React inside a jQuery UI - so we'll do it first.
 The ProductListComponent is pretty straightforward:
 
-```jsx
+```
 var ProductListComponent = React.createClass({
-    render: function(props) {
-        return (
-            <ul className="product-list">
-                {this.props.products.map(function(product) {
-                    return <ProductComponent key={product.id} product={product} />
-                })}
-            </ul>
-        );
-    }
+  render: function(props) {
+    return (
+      <ul className="product-list">
+        {this.props.products.map(function(product) {
+          return <ProductComponent key={product.id} product={product} />
+        })}
+      </ul>
+    );
+  }
 });
 ```
 
@@ -134,16 +135,16 @@ but in ProductComponent we need some extra
 code to make the call to jQuery. We add an extra button-container element,
 so that we have somewhere to put the jQuery DOM, and keep a reference to it.
 
-```jsx
+```
 render: function(props) {
-    // we need to keep a ref to the button-container so we can update it with jQuery
-    return (
-        <li>
-            {this.props.product.name}
-            <span className="button-container" ref="buttonContainer"></span>
-        </li>
-    );
-},
+  // we need to keep a ref to the button-container so we can update it with jQuery
+  return (
+    <li>
+      {this.props.product.name}
+      <span className="button-container" ref="buttonContainer"></span>
+    </li>
+  );
+}
 ```
 # Lifecycle methods
 It's important to get familiar with the various React lifecycle methods.
@@ -154,40 +155,40 @@ button with jQuery on each render.
 
 ```javascript
 componentDidMount: function() {
-    this.renderBuyButton();
+  this.renderBuyButton();
 },
 componentDidUpdate: function() {
-    this.renderBuyButton();
+  this.renderBuyButton();
 },
 renderBuyButton: function() {
-    // render the buy button with jQuery
-    $(this.refs.buttonContainer).html(buyButtonJquery(this.props.product));
+  // render the buy button with jQuery
+  $(this.refs.buttonContainer).html(buyButtonJquery(this.props.product));
 }
 ```
 
 Here's the complete ProductComponent:
 
-```jsx
+```
 var ProductComponent = React.createClass({
-    componentDidMount: function() {
-        this.renderBuyButton();
-    },
-    componentDidUpdate: function() {
-        this.renderBuyButton();
-    },
-    render: function(props) {
-        // we need to keep a ref to the button-container so we can update it with jQuery
-        return (
-            <li>
-                {this.props.product.name}
-                <span className="button-container" ref="buttonContainer"></span>
-            </li>
-        );
-    },
-    renderBuyButton: function() {
-        // render the buy button with jQuery
-        $(this.refs.buttonContainer).html(buyButtonJquery(this.props.product));
-    }
+  componentDidMount: function() {
+    this.renderBuyButton();
+  },
+  componentDidUpdate: function() {
+    this.renderBuyButton();
+  },
+  render: function(props) {
+    // we need to keep a ref to the button-container so we can update it with jQuery
+    return (
+      <li>
+        {this.props.product.name}
+        <span className="button-container" ref="buttonContainer"></span>
+      </li>
+    );
+  },
+  renderBuyButton: function() {
+    // render the buy button with jQuery
+    $(this.refs.buttonContainer).html(buyButtonJquery(this.props.product));
+  }
 });
 ```
 
@@ -195,29 +196,29 @@ var ProductComponent = React.createClass({
 Now we're going to do it the other way and stick some React DOM inside our jQuery DOM. This is a little
 trickier. We'll start with a BuyButtonComponent in React, there's not much to it:
 
-```jsx
+```
 var BuyButtonComponent = React.createClass({
-    onClick: function(event) {
-        buyProduct(this.props.product.id);
-    },
-    componentDidMount: function() {
-        console.log('component did mount - stuff to clean up later');
-    },
-    render: function(props) {
-        return (
-            <button className="buy-button" onClick={this.onClick}>{this.props.product.price}</button>
-        );
-    },
-    componentWillUnmount: function() {
-        console.log('about to unmount - clean up stuff here');
-    }
+  onClick: function(event) {
+    buyProduct(this.props.product.id);
+  },
+  componentDidMount: function() {
+    console.log('component did mount - stuff to clean up later');
+  },
+  render: function(props) {
+    return (
+      <button className="buy-button" onClick={this.onClick}>{this.props.product.price}</button>
+    );
+  },
+  componentWillUnmount: function() {
+    console.log('about to unmount - clean up stuff here');
+  }
 });
 
 function buyButtonReact(product, element) {
-    ReactDOM.render(
-        <BuyButtonComponent product={product} />,
-        element
-    );
+  ReactDOM.render(
+    <BuyButtonComponent product={product} />,
+    element
+  );
 }
 ```
 
@@ -233,15 +234,15 @@ to the container component so we can use it later.
 
 ```javascript
 products.forEach(function(product) {
-    var item = $('<li>' + product.name + '</li>');
+  var item = $('<li>' + product.name + '</li>');
 
-    // add a container element where we'll attach our React component
-    var buttonContainer = $('<span class="button-container"></span>');
-    // add product data to use in our React component
-    buttonContainer.data('product', product);
+  // add a container element where we'll attach our React component
+  var buttonContainer = $('<span class="button-container"></span>');
+  // add product data to use in our React component
+  buttonContainer.data('product', product);
 
-    item.append(buttonContainer);
-    list.append(item);
+  item.append(buttonContainer);
+  list.append(item);
 });
 ```
 
@@ -255,7 +256,7 @@ we insert a new list with jQuery.
 ```javascript
 // clean up any mounted React components
 $(element).find('.button-container').each(function() {
-    ReactDOM.unmountComponentAtNode(this);
+  ReactDOM.unmountComponentAtNode(this);
 });
 ```
 
@@ -263,41 +264,41 @@ You can verify in the console that componentWillUnmount is called for each of th
 
 ```javascript
 function productListJqueryReact(products, element) {
-    var list = $('<ul class="product-list"></ul>');
+  var list = $('<ul class="product-list"></ul>');
 
-    // clean up any mounted React components
-    $(element).find('.button-container').each(function() {
-        ReactDOM.unmountComponentAtNode(this);
-    });
+  // clean up any mounted React components
+  $(element).find('.button-container').each(function() {
+    ReactDOM.unmountComponentAtNode(this);
+  });
 
-    products.forEach(function(product) {
-        var item = $('<li>' + product.name + '</li>');
+  products.forEach(function(product) {
+    var item = $('<li>' + product.name + '</li>');
 
-        // add a container element where we'll attach our React component
-        var buttonContainer = $('<span class="button-container"></span>');
-        // add product data to use in our React component
-        buttonContainer.data('product', product);
+    // add a container element where we'll attach our React component
+    var buttonContainer = $('<span class="button-container"></span>');
+    // add product data to use in our React component
+    buttonContainer.data('product', product);
 
-        item.append(buttonContainer);
-        list.append(item);
-    });
+    item.append(buttonContainer);
+    list.append(item);
+  });
 
-    // replace the existing list if there is one
-    var currentList = $(element).find('.product-list');
-    if (currentList.length) {
-        currentList.replaceWith(list);
-    } else {
-        $(element).append(list);
-    }
+  // replace the existing list if there is one
+  var currentList = $(element).find('.product-list');
+  if (currentList.length) {
+    currentList.replaceWith(list);
+  } else {
+    $(element).append(list);
+  }
 
-    // attach our React components to the containers
-    list.find('.button-container').each(function() {
-        var container = $(this);
-        var product = container.data('product');
+  // attach our React components to the containers
+  list.find('.button-container').each(function() {
+    var container = $(this);
+    var product = container.data('product');
 
-        // React needs a plain, non-jQueryfied DOM element, so we can use plain "this"
-        buyButtonReact(product, this);
-    });
+    // React needs a plain, non-jQueryfied DOM element, so we can use plain "this"
+    buyButtonReact(product, this);
+  });
 }
 ```
 
