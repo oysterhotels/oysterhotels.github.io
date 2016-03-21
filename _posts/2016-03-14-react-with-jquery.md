@@ -116,7 +116,7 @@ We'll start by replacing most of the product list with React but leaving the buy
 This is simpler than the inverse - sticking React inside a jQuery UI - so we'll do it first.
 The ProductListComponent is pretty straightforward:
 
-```javascript
+```jsx
 var ProductListComponent = React.createClass({
     render: function(props) {
         return (
@@ -134,7 +134,7 @@ but in ProductComponent we need some extra
 code to make the call to jQuery. We add an extra button-container element,
 so that we have somewhere to put the jQuery DOM, and keep a reference to it.
 
-```javascript
+```jsx
 render: function(props) {
     // we need to keep a ref to the button-container so we can update it with jQuery
     return (
@@ -167,7 +167,7 @@ renderBuyButton: function() {
 
 Here's the complete ProductComponent:
 
-```javascript
+```jsx
 var ProductComponent = React.createClass({
     componentDidMount: function() {
         this.renderBuyButton();
@@ -195,7 +195,7 @@ var ProductComponent = React.createClass({
 Now we're going to do it the other way and stick some React DOM inside our jQuery DOM. This is a little
 trickier. We'll start with a BuyButtonComponent in React, there's not much to it:
 
-```javascript
+```jsx
 var BuyButtonComponent = React.createClass({
     onClick: function(event) {
         buyProduct(this.props.product.id);
