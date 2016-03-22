@@ -31,10 +31,10 @@ just do that and save yourself the inevitable hassle you'll have when something 
 
 ## Okay so you can't rewrite it
 For whatever reason you've determined it's not practical to rewrite your jQuery code. Here is an important
-caveat: I think using jQuery and React to manage updates to the **same** DOM elements is a bad idea.
+caveat: I think using jQuery and React to manage updates to the *same* DOM elements is a bad idea.
 React is really smart about figuring out how to update the DOM, but that only works if React is the only thing
-doing the updates. So unless you can cleanly separate the DOM elements in your UI so that some **only** get
-updated by React and others **only** get updated by jQuery, I wouldn't try it. 
+doing the updates. So unless you can cleanly separate the DOM elements in your UI so that some *only* get
+updated by React and others *only* get updated by jQuery, I wouldn't try it. 
 
 So say for instance you're
 going to render a product list with a React template, and then jQuery is going to add and remove CSS classes
@@ -269,7 +269,7 @@ data to render the buy buttons with React. You can see in the console that ``com
 
 We might render this product list multiple times, so we need to make sure our ``productListJqueryReact`` function works
 when called repeatedly. jQuery is going to blow away the whole DOM each time which won't give React a chance
-to do its clean up (calling ``componentWillUnmount``), so we need to manually unmount the React components **before**
+to do its clean up (calling ``componentWillUnmount``), so we need to manually unmount the React components *before*
 we insert a new list with jQuery.
 
 ```javascript
