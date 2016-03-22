@@ -4,7 +4,6 @@ author: Alex
 layout: post
 permalink: /using-react-and-jquery-together/
 disqus_page_identifier: react-jquery
-draft: true
 ---
 
 ![React + jQuery](/public/images/react-jquery.png)
