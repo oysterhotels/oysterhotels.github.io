@@ -326,3 +326,4 @@ function productListJqueryReact(products, element) {
 ```
 
 I'm sure there are other ways to handle the same issues, and other edge cases where jQuery and React can conflict and cause problems, but the examples above cover the most common use cases I've encountered. There's not a lot of writing I could find about using both simultaneously, and the conventional wisdom seems to basically be "don't do it," so let us know if you have experience working with both or think we missed something!
+
