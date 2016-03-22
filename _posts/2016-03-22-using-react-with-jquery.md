@@ -25,7 +25,7 @@ React goodness, you may have to figure out how to get React to play well with jQ
 Let's say you have some piece of UI that gets rendered with jQuery, and you want to stick in some
 new component written with React. Take a look at your jQuery rendering function. Are you just building up some
 big string of HTML and sticking it in the DOM? Or using some kind of JavaScript template? If your rendering
-is already reasonable functional, i.e. some data goes into your function and some HTML comes out (or gets
+is already reasonably functional, i.e. some data goes into your function and some HTML comes out (or gets
 appended to the DOM or whatever) it will be pretty easy to just rewrite in React. So you should probably 
 just do that and save yourself the inevitable hassle you'll have when something breaks and you have to debug it.
 
@@ -113,7 +113,7 @@ function productListJustJquery(products, element) {
 }
 ```
 
-# jQuery inside a React component
+## jQuery inside a React component
 We'll start by replacing most of the product list with React but leaving the buy button in jQuery. 
 This is simpler than the inverse - sticking React inside a jQuery UI - so we'll do it first.
 The ``ProductListComponent`` is pretty straightforward:
@@ -153,7 +153,7 @@ render: function(props) {
 }
 ```
 
-# Life cycle methods
+## Life cycle methods
 It's important to get familiar with the various React life cycle methods.
 The relevant ones here are ``componentDidMount`` - which is called after the first render, and
 ``componentDidUpdate`` - which is called after subsequent renders. In each of these methods we just call
@@ -206,7 +206,7 @@ var ProductComponent = React.createClass({
 });
 ```
 
-# React components inside jQuery
+## React components inside jQuery
 Now we're going to do it the other way and stick some React DOM inside our jQuery DOM. This is a little
 trickier. We'll start with a ``BuyButtonComponent`` in React, there's not much to it:
 
