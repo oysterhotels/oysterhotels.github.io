@@ -12,11 +12,19 @@ published: false
 Here at [Oyster](https://www.oyster.com), we are one of the leading sites who provide comprehensive photographic reviews for hotel travel. One key component of our imagery database is panorama imaging, produced at high quality and large scale. In this three-part series, we will be looking at the Computer Vision work that has been part of our panorama pipeline. Specifically, in this first part of the series, we will introduce our automated pipeline for generating High Dynamic Range (HDR) panorama.
 
 ## HDR Panorama
-[Panorama images](https://www.[Oyster](https://www.oyster.com).com/jamaica/hotels/moon-palace-jamaica-grande/all-panoramas/beach--v115415/) at [Oyster](https://www.oyster.com) has full angle range with 180 degree vertically and 360 degree horizontally, they provide imersive experience for viewers to explore the ubiquitous view of the venue, whethere it is outside at the pool, on rooftop or inside a hotel room. Panorama images now become a trending and to-have media type for most image-oriented website. Meanwhile, HDR imaging is a common technique to produce a greater dynamic range of luminosity than standard digital imaging, especially useful for panorama imaging where an evenly distributed look will greatly improve panorama quality. HDR imaging is normally achieved by merging multiple low-dynamic-range photographs. We use [PTGui](http://www.ptgui.com), a stitching software, to carry out batch stitching of 12 fisheye images (180 degree x 180 degree) of the 4 different views (left, right, front, back), three images of different exposure for reach view, the stitching process will return one equirectangular panorama.
+[Panorama images](https://www.[Oyster](https://www.oyster.com).com/jamaica/hotels/moon-palace-jamaica-grande/all-panoramas/beach--v115415/) at [Oyster](https://www.oyster.com) has full angle range with 180 degree vertically and 360 degree horizontally, they provide imersive experience for viewers to explore the ubiquitous view of the venue, whethere it is outside at the pool, on rooftop or inside a hotel room. Panorama images now become a trending and to-have media type for most image-oriented website. Meanwhile, HDR imaging is a common technique to produce a greater dynamic range of luminosity than standard digital imaging, especially useful for panorama imaging where an evenly distributed look will greatly improve panorama quality. HDR imaging is normally achieved by merging multiple low-dynamic-range photographs. We use [PTGui](http://www.ptgui.com), a stitching software, to carry out batch stitching of 12 fisheye images (180 degree x 180 degree) of the 4 different views (left, right, front, back), 3 images of different exposure for reach view, the stitching process will return one equirectangular panorama.
 
 ![Fisheyes images](/public/images/fisheyes.png)
 
-While PTGui is a good choice for image stitching, its HDR quality is not the best available in this area and people normally use an alternative tool for HDR merging. SNS-HDR is the package used by [Oyster](https://www.oyster.com), thanks to its support on batch processing, its excellent HDR quality and its adequate deghosting support. The tricky part for using SNS-HDR as a batch tool is its limited support on file format input and the auto-grouping of images of the same view, and that is where Computer Vision comes into place.
+While PTGui is a good choice for image stitching, its HDR quality is not the best available, and people normally use alternative tools for HDR merging. [SNS-HDR](http://www.sns-hdr.com) is the package used by [Oyster](https://www.oyster.com), thanks to its support on batch processing, its excellent HDR quality and its adequate deghosting support compared to PTGui.
+
+#### PTGui HDR
+![PTGui HDR](/public/images/ptgui1.png)
+
+#### SNS-HDR
+![SNS-HDR](/public/images/snshdr1.png)
+
+The tricky part for using SNS-HDR as a batch tool is its limited support on file format input and the auto-grouping of images of the same view, and that is where Computer Vision comes into place.
 
 The first problem on accepted image input, SNS-HDR works with RAW files, but it works especially best with converted raw DNG format  (using dngconverter from Adobe), compared to two common formats CR2 or NEF (examples).
 
