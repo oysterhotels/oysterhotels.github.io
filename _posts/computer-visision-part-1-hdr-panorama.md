@@ -1,5 +1,5 @@
 ---
-title: "Computer-Visision-Part-1-HDR-panorama"
+title: "Near-duplicate image detection and HDR panorama at large scale"
 author: Tuan
 layout: post
 permalink: /computer-visision-part-1-hdr-panorama/
@@ -7,7 +7,7 @@ disqus_page_identifier: computer-visision-part-1-hdr-panorama
 published: false
 ---
 
-![React + jQuery](/public/images/react-jquery.png)
+![HDR Panorama](/public/images/cover.png)
 
 In this post I'll be covering some tips on how to use React and jQuery together in the same UI.
 Okay so first off you might be thinking "why would you want to do such a thing?" - in fact the idea
