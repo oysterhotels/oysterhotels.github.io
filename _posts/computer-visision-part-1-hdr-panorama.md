@@ -87,10 +87,10 @@ Once similar images are grouped into correct views, SNS-HDR is used to merge LDR
 
 
 #### Normal Panorama
-![PTGui HDR](/public/images/ptgui1.png)
+![PTGui HDR](/public/images/ptgui2.png)
 
 #### HDR Panorama done right
-![SNS-HDR](/public/images/snshdr1.png)
+![SNS-HDR](/public/images/snshdr2.png)
 
 In this post, we have presented our approach to generating HDR panorama at large scale, using available packages like DNGConverter, DCRAW, SNS-HDR, PTGui and with the help from Computer Vision techniques with OpenCV. Please feel free to visit our website [Oyster](https://www.oyster.com) to see our rich collection of hotel panoramas all around the world. Also, please stay tuned for part 2 and 3 of this Computer Vision series, where we will show you how virtual tour can be generated (again fully automated at large scale) from a set of panoramas, and how smart features like mini-maps can be added to your tour to improve user experience.
 
