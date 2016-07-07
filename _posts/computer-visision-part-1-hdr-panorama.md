@@ -26,9 +26,9 @@ While PTGui is a good choice for image stitching, its HDR quality is not the bes
 
 The tricky part for using SNS-HDR as a batch tool is its limited support on file format input and the auto-grouping of images of the same view, and that is where Computer Vision comes into place.
 
-The first problem on accepted image input, SNS-HDR works with RAW files, but it works especially best with converted raw DNG format  (using dngconverter from Adobe), compared to two common formats CR2 or NEF (examples).
+The first problem on accepted image input, SNS-HDR works with RAW files, but it works especially best with converted raw DNG format  (using DNGConverter), compared to two common formats CR2 or NEF.
 
-The second problem of using SNS-HDR batch processing is to figure out the three images of the same view, which is done using OpenCV, one of the most comprehensive Computer Vision libraries to dates (link and numpy's). Since OpenCV does not work directly with raw files (CR2, NEF, DNG), we use DCRAW to convert DNG to TIFF, before OpenCV can be used to detect 4 sets of near-duplicate 3 images of the same view.
+The second problem of using SNS-HDR batch processing is to figure out the three images of the same view, which is done using OpenCV  (Python binding with Numpy), one of the most comprehensive Computer Vision libraries to dates. Since OpenCV does not work directly with raw files (CR2, NEF, DNG), we use DCRAW to convert DNG to TIFF, before OpenCV can be used to detect 4 sets of near-duplicate 3 images of the same view.
 
 ## Near-duplicate image detection
 In this context, we have 12 fisheye images (180 vert by 180 horz) of 4 adjacent views (left, front, right, back), each view has 3 images taken at different exposure level (shutter speed varied). With no assumption on shooting times (all 12 images could be taken at arbitrary time), and no assumption on exposure level (our camera is auto-metered at each view so shutter times might not be the same at each angle), and the 3 images of the same view are different in exposure so we cannot apply direct comparison methods like checksum, we finally resort to Computer Vision to robustly arrange 12 source images into 3 view groups.
@@ -37,7 +37,20 @@ There exists several methods to carry out near-duplicate image detection, but th
 
 In our approach, we apply histogram equalization to balance out multiple exposure levels, pixel-wise absolute difference (pixel-wise difference is chosen because spatial difference is more important in our case of unaltered adjacent views, for cases like detecting transformed images people normally opt to local edge or contour difference), followed by a postprocessing step of lower bound trimming (to remove illumination difference noise) and image erosion (to remove camera movement noise). This step will return a binary difference image of any two input images, which could also be used for detecting ghosting problem in HDR merging.
 
-[CODE]
+#### Image Comparison using pixel-wise difference, with lower bound trimming and erosion
+```python
+def image_comparison(img1, img2, lower_bound=120):
+    e1 = cv2.equalizeHist(img1)
+    e2 = cv2.equalizeHist(img2)
+
+    diff = cv2.absdiff(e1, e2)
+    _, diff = cv2.threshold(diff, lower_bound, 255, cv2.THRESH_BINARY)
+    kernel = np.ones((2, 2), np.uint8)
+    diff = cv2.erode(diff, kernel, iterations=1)
+    nonZero = cv2.countNonZero(diff)
+
+    return nonZero
+```
 
 The last step in this approach is association, where pair-wise image difference is used to associate similar images into sets, this is the step that is normally specific and fine-tuned for different system, and there are two common ways this can be implemented, similar to a common clustering problem, either by distance-based (hierarchical clustering) or by iterative centroid or group-based (k-means clustering). In a distance-based method, a distance threshold value is chosen (or learned empirically from data) to decide if two items belong to the same group, once two images are matched, subsequent association steps will only need to be carried on one sample element of the group, this approach has the advantage of being fast (linear processing time), but its performance depends on how well the distance threshold is chosen, therefore this method is mostly used when data is well separated and speed is a requirement. In our case, the number of images is small, 12, and the accuracy requirement is 100% of correct match (imagine a HDR image merged from 3 different images, yep it does not look pretty), therefore we go for the second approach where we match all pair-wise combination of source images (66 matches for 12 images), the constraint on 4 sets of 3 images is used as the termination condition for our association step. Our iterative association consists of two steps, collecting tuples of top 3 matches (representing one group) and filtering out good matches (any match tuples that are collected exactly 3 times is a correct association), and repeat until all elements are filtered.
 
