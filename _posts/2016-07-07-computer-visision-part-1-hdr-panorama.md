@@ -1,15 +1,15 @@
 ---
-title: "Near-duplicate image detection and HDR panorama at large scale"
+title: "Generating HDR panoramas at scale"
 author: Tuan
 layout: post
-permalink: /computer-visision-part-1-hdr-panorama/
-disqus_page_identifier: computer-visision-part-1-hdr-panorama
-published: false
+permalink: /computer-vision-part-1-hdr-panorama/
+disqus_page_identifier: computer-vision-part-1-hdr-panorama
+published: true
 ---
 
 ![HDR Panorama](/public/images/cover.png)
 
-Here at [Oyster](https://www.oyster.com), we are the leading website for comprehensive photographic reviews of hotels. One key component of our imagery database is panorama images, produced at high quality and large scale. In this three-part series, we will be looking at the Computer Vision work that has been part of our panorama pipeline. In this first part of the series, we will introduce our automated pipeline for generating High Dynamic Range (HDR) panoramas.
+Here at [Oyster](https://www.oyster.com), we are the leading website for comprehensive photographic reviews of hotels. One key component of our imagery database is panoramas, produced at high quality and large scale (over 150,000 to date). In this three-part series, we will be looking at the Computer Vision work that has been part of our panorama pipeline. In this first part of the series, we will introduce our automated pipeline for generating High Dynamic Range (HDR) panoramas.
 
 ## HDR Panorama
 [Panorama images](https://www.[Oyster](https://www.oyster.com).com/jamaica/hotels/moon-palace-jamaica-grande/all-panoramas/beach--v115415/) at [Oyster](https://www.oyster.com) have full angle range with 180 degrees vertically and 360 degrees horizontally. They provide an immersive experience for viewers to explore a ubiquitous view of the venue - whether it is outside at the pool, on the rooftop or inside a hotel room. Panorama images have now become a trending and must-have media type for most image-oriented websites. Meanwhile, HDR imaging is a common technique to produce a greater dynamic range of luminosity than standard digital imaging. It is  especially useful for panorama imaging where an evenly distributed look will greatly improve the quality. HDR imaging is normally achieved by merging multiple low-dynamic-range photographs. We use [PTGui](http://www.ptgui.com), a stitching software, to carry out batch stitching of 12 fisheye images (180 degree x 180 degree) of the four different views (left, right, front, back) with three images of different exposure for each view. The stitching process will return one equirectangular panorama.
