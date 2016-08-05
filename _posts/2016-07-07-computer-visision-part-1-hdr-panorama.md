@@ -99,8 +99,12 @@ Once similar images are grouped into correct views, SNS-HDR is used to merge LDR
 ![SNS-HDR](/public/images/snshdr2.png)
 
 Here is list of randomly selected panoramas from Oyster compared to Google
+
+
 [Trump Soho from Google.com](https://www.google.com/maps/@40.7257012,-74.0055927,3a,75y,266.18h,79.62t/data=!3m8!1e1!3m6!1s-H0_jyN7iLq8%2FVyv1THyMdGI%2FAAAAAAABYto%2FsG9LtMP-Z8sO0bOxSsn8PxlxjU9h35N_gCLIB!2e4!3e11!6s%2F%2Flh5.googleusercontent.com%2F-H0_jyN7iLq8%2FVyv1THyMdGI%2FAAAAAAABYto%2FsG9LtMP-Z8sO0bOxSsn8PxlxjU9h35N_gCLIB%2Fw203-h101-n-k-no%2F!7i8704!8i4352!6m1!1e1)
+
 [Trump Soho from Oyster.com](https://www.oyster.com/new-york-city/hotels/trump-soho-new-york/all-tours/lobby--v24780/)
+
 
 [Refinery Hotel from Google.com](https://www.google.com/maps/@40.752632,-73.9850296,3a,75y,141.78h,65.16t/data=!3m7!1e1!3m5!1sPZRAzKwZYbgAAAQpkog1Jw!2e0!3e2!7i13312!8i6656!6m1!1e1)
 
