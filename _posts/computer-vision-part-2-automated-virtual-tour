@@ -1,0 +1,34 @@
+---
+title: "Automated virtual tour"
+author: Tuan
+layout: post
+permalink: /computer-vision-part-2-automated-virtual-tour/
+disqus_page_identifier: computer-vision-part-2-automated-virtual-tour
+published: false
+---
+
+![HDR Panorama](/public/images/cv2-cover.png)
+
+Here at [Oyster](https://www.oyster.com), we are the leading website for comprehensive photographic reviews of hotels. One key component of our imagery database is panoramas, produced at high quality and large scale (over 150,000 to date). In this three-part series, we will be looking at the Computer Vision work that has been part of our panorama pipeline. In this first part of the series, we will introduce our automated pipeline for generating High Dynamic Range (HDR) panoramas.
+
+## HDR Panorama
+[Panorama images](https://www.oyster.com/jamaica/hotels/moon-palace-jamaica-grande/all-panoramas/beach--v115415/) at [Oyster](https://www.oyster.com) have full angle range with 180 degrees vertically and 360 degrees horizontally. They provide an immersive experience for viewers to explore a ubiquitous view of the venue - whether it is outside at the pool, on the rooftop or inside a hotel room. Panorama images have now become a trending and must-have media type for most image-oriented websites. Meanwhile, HDR imaging is a common technique to produce a greater dynamic range of luminosity than standard digital imaging. It is  especially useful for panorama imaging where an evenly distributed look will greatly improve the quality. HDR imaging is normally achieved by merging multiple low-dynamic-range photographs. We use [PTGui](http://www.ptgui.com), a stitching software, to carry out batch stitching of 12 fisheye images (180 degree x 180 degree) of the four different views (left, right, front, back) with three images of different exposure for each view. The stitching process will return one equirectangular panorama.
+
+#### Raw fisheye images
+![Fisheyes images](/public/images/fisheyes.png)
+
+While PTGui is a good choice for image stitching, its HDR quality is not the best available. People often use alternative tools for HDR merging. [SNS-HDR](http://www.sns-hdr.com) is the package used by [Oyster](https://www.oyster.com). It has support for batch processing, excellent HDR quality, and adequate deghosting support (compared to PTGui).
+
+#### PTGui HDR
+![PTGui HDR](/public/images/ptgui1.png)
+
+#### SNS-HDR
+![SNS-HDR](/public/images/snshdr1.png)
+
+
+In this post, we have presented our approach to generating HDR panorama at large scale using available packages like DNGConverter, DCRAW, SNS-HDR, PTGui, and with the help from Computer Vision techniques with OpenCV. Please feel free to visit our website [Oyster](https://www.oyster.com) to see our rich collection of hotel panoramas all around the world. Also, please stay tuned for part 2 and 3 of this Computer Vision series, where we will show you how virtual tour can be generated (again fully automated at large scale) from a set of panoramas, and how smart features like mini-maps can be added to your tour to improve user experience.
+
+### About the author:
+Tuan Thi is a Senior Software Engineer in Computer Vision at [Oyster](https://www.oyster.com).com, part of Smarter Travel Media Group, at TripAdvisor. He finished his PhD in Computer Vision and Machine Learning in 2011.  Before joining TripAdvisor, he was a research engineer and computer vision scientist at Canon Research and Placemeter Ltd. with various international publications and patents in the field of local features, structured learning and deep learning.
+
+
