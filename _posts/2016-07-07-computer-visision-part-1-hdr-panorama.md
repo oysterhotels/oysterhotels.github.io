@@ -103,12 +103,17 @@ Here is list of randomly selected panoramas from Oyster compared to Google
 [Trump Soho from Oyster.com](https://www.oyster.com/new-york-city/hotels/trump-soho-new-york/all-tours/lobby--v24780/)
 
 [Refinery Hotel from Google.com](https://www.google.com/maps/@40.752632,-73.9850296,3a,75y,141.78h,65.16t/data=!3m7!1e1!3m5!1sPZRAzKwZYbgAAAQpkog1Jw!2e0!3e2!7i13312!8i6656!6m1!1e1)
+
 [Refinery Hotel from Oyster.com](https://www.oyster.com/new-york-city/hotels/the-refinery-hotel/all-tours/parker-and-quinn-restaurant--v19455/)
 
+
 [Holiday Inn Resort Montego Bay on Google.com](https://www.google.com/maps/place/Holiday+Inn+Resort+Montego+Bay/@18.5230122,-77.8590851,3a,75y,180.42h,90.31t/data=!3m8!1e1!3m6!1s-ThDGB2m55gk%2FVEaS54n2W5I%2FAAAAAAACsyA%2FzPC7j55CgeYtXzXZ4qSHhqhjIDO617C5wCLIB!2e4!3e11!6s%2F%2Flh6.googleusercontent.com%2F-ThDGB2m55gk%2FVEaS54n2W5I%2FAAAAAAACsyA%2FzPC7j55CgeYtXzXZ4qSHhqhjIDO617C5wCLIB%2Fw203-h101-n-k-no%2F!7i3584!8i1792!4m12!1m6!3m5!1s0x8eda29428da7fc87:0x654d78ef04bd3848!2sHoliday+Inn+Resort+Montego+Bay!8m2!3d18.522744!4d-77.857566!3m4!1s0x8eda29428da7fc87:0x654d78ef04bd3848!8m2!3d18.522744!4d-77.857566!6m1!1e1)
+
 [Holiday Inn Resort Montego Bay on Oyster.com](https://www.oyster.com/jamaica/hotels/holiday-inn-resort-montego-bay/all-panoramas/beach--v115325/)
 
+
 [Sensatori Jamaica by Karisma on Google.com](https://www.google.com/maps/place/Azul+Sensatori+Negril/@18.3312721,-78.3373032,3a,75y,166.33h,80.87t/data=!3m8!1e1!3m6!1s-nL2Lp-lHYU0%2FV3VY_yUYSWI%2FAAAAAAAADkU%2Fsbt2HfQiQVAb7naC0QBLc7Lzf70ifVa_ACLIB!2e4!3e11!6s%2F%2Flh6.googleusercontent.com%2F-nL2Lp-lHYU0%2FV3VY_yUYSWI%2FAAAAAAAADkU%2Fsbt2HfQiQVAb7naC0QBLc7Lzf70ifVa_ACLIB%2Fw234-h116-n-k-no%2F!7i6325!8i3162!4m12!1m6!3m5!1s0x8ed90d9910af296b:0x2dd5eafcd573a170!2sAzul+Sensatori+Negril!8m2!3d18.2791209!4d-78.346129!3m4!1s0x8ed90d9910af296b:0x2dd5eafcd573a170!8m2!3d18.2791209!4d-78.346129!6m1!1e1)
+
 [Sensatori Jamaica by Karisma on Oyster.com](https://www.oyster.com/jamaica/hotels/sensatori-jamaica-by-karisma/all-panoramas/grounds--v119425/)
 
 In this post, we have presented our approach to generating HDR panorama at large scale using available packages like DNGConverter, DCRAW, SNS-HDR, PTGui, and with the help from Computer Vision techniques with OpenCV. Please feel free to visit our website [Oyster](https://www.oyster.com) to see our rich collection of hotel panoramas all around the world. Also, please stay tuned for part 2 and 3 of this Computer Vision series, where we will show you how virtual tour can be generated (again fully automated at large scale) from a set of panoramas, and how smart features like mini-maps can be added to your tour to improve user experience.
