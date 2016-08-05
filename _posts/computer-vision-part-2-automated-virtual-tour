@@ -9,6 +9,11 @@ published: false
 
 ![HDR Panorama](/public/images/cv2-cover.png)
 
+Welcome back to 2nd part of the 3-part Computer Vision series at Oyster.com. If you have not seen our 1st part of the series, we would recommend you [check it out](http://tech.oyster.com/computer-vision-part-1-hdr-panorama), in that part we show how HDR (High Dynamic Range) panoramas are done at Oyster.com (including some comparisons of our panoramas vs Google.com panoramas).
+
+In this part, we will share the behind-the-scene work of our recently added feature [Virtual walkthrough](https://www.oyster.com/french-polynesia/hotels/intercontinental-bora-bora-le-moana-resort/all-tours/pool--v35274/), or short as walkthrough.   
+
+
 Here at [Oyster](https://www.oyster.com), we are the leading website for comprehensive photographic reviews of hotels. One key component of our imagery database is panoramas, produced at high quality and large scale (over 150,000 to date). In this three-part series, we will be looking at the Computer Vision work that has been part of our panorama pipeline. In this first part of the series, we will introduce our automated pipeline for generating High Dynamic Range (HDR) panoramas.
 
 ## HDR Panorama
