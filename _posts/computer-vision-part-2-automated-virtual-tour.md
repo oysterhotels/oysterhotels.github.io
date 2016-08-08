@@ -9,7 +9,7 @@ published: false
 
 ![HDR Panorama](/public/images/cv2-cover.png)
 
-Welcome back to 2nd part of the 3-part Computer Vision series at Oyster.com. If you have not seen our 1st part of the series, we would recommend you [check it out](http://tech.oyster.com/computer-vision-part-1-hdr-panorama), in that part we show how HDR (High Dynamic Range) panoramas are done at Oyster.com (including some comparisons of our panoramas vs Google.com panoramas).
+Welcome back to the 2nd of the 3-part Computer Vision series at Oyster.com. If you have not seen our 1st part of the series, we would recommend you [check it out](http://tech.oyster.com/computer-vision-part-1-hdr-panorama), in that part we show how HDR (High Dynamic Range) panoramas are done at Oyster.com (including some comparisons of our panoramas vs Google.com panoramas).
 
 In this part, we will share the behind-the-scene work of our recently added feature [Virtual walkthrough](https://www.oyster.com/french-polynesia/hotels/intercontinental-bora-bora-le-moana-resort/all-tours/pool--v35274/), or short as walkthrough.
 
@@ -21,22 +21,39 @@ Walkthrough is a set of connected panoramas where users can navigate from panora
 ## Automating walkthrough process
 Our process starts with a set of HDR panoramas as input, finds the panoramas that are connected, estimates the relationship of those connected panoramas, and produces links that are integratable into a Krpano virtual tour's template project. For a set of n panoramas, we carry out n * (n - 1) / 2 pano-pano matchings. The whole process for a pano-pano matching has 3 main steps, namely disintegrating local views, matching and estimating panorama links, and integrating local links.
 
+Set of equirectangular panoramas as input
 ![Set of equirectangular panoramas as input](/public/images/cv2-pano-set.png)
 
-### Disintegrating local views
+### Disintegrating local views - Pano-pano matching
 A 360 panorama is a representation of a sphere which center is at the camera location. Two 360 panoramas are connected when the camera location of one panorama is inside the scene of the other panorama. In order to find out if two panoramas are connected, we need to look for camera position on one panorama in the other panorama. The original equirectangular format of input panorama can be divided into 6 non-overlapping local views representing the Up, Down, Left, Right, Front, and Back side of the cube covering the 360 sphere of the panorama scene. This division enables us to use epipolar geometry of two image planes sharing overlapping views to find epipoles, which are camera positions in our case.
 
+Spliting equirectangular panorama into 6 planar sides
 ![Spliting equirectangular panorama into 6 planar sides](/public/images/cv2-pano-disintegrating.png)
 
 Epipolar geometry is commonly used when there are multiple image views sharing overlaps, as long as enough (7+) corresponding points (points that appear in both image views) are detected in two scenes, a fundamental matrix can be found to describe the intrinsic projective geometry between two views. [OpenCV](http://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html) provides all convenient methods to find fundamental matrix and epipoles from corresponding points, and those are what we are gonna use for our purpose.
 
+Epipolar geometry - positions of epipoles e and e' are the camera locations of the 2 views in each other's image
 ![Epipolar geometry](/public/images/cv2-pano-epipolar.png)
 
-### Matching and finding pano links
+### Matching and finding pano links - local view matching
 
-In this step, we will be finding corresponding points and then camera positions for each pano view. There are 3 substeps: feature detection, feature matching and epipole estimating.
+In this step, we will be finding corresponding points and then camera positions for each pano view. Corresponding points are the pairs of points, one from each image view and both display the same point in real-world. There are 3 substeps in this process, we first find a set of points of interest in each image (those points of interest normally represent corners, edges or discriminative patterns in each image view), then we use the region around each point to estimate if two points are displaying the same real-world point, then corresponding points are used to estimate the camera locations.
+
+Epipolar geometry is commonly used to describe the geometry of multiple pin-hole cameras capturing the same 3D scene. It is also essential for our problem because our problem of generating virtual tour with different set of images taken at different locations can be formulated as an epipolar scenario where a scene is projected onto two pin-hole cameras. By aligning our problem into epipolar geometry, we can then be able to make use of some of its constraints to solve our problem, which is finding camera position.
+
+Given two panoramas, which we can call Left and Right, the problem of creating the virtual tour for these 2 panoramas becomes finding the spherical coordinate of camera Left in panorama Right, and coordinate of camera Right in panorama Left. By projecting our spherical coordinates (defined by horizontal angular ath and vertical angular atv) into planar coordinates (horizontal value x and horizontal value y) (where the reprojection from planar to spherical is given by: ath = (x/width - 0.5) * hfov and atv = (y/height - 0.5) * vfov, and hfov = 360 and vfov = 180 for our complete panorama), resulting in 6 slices (Left, Right, Front, Back, Up, Down), we can look for the location of camera Left in all 6 slices of camera Right and vice versa the location of camera Right in all 6 slices of camera Left. Therefore, the original problem of finding camera location for each pair of panoramas becomes a search for camera location in all combinations of panorama slices, which is n * (n - 1) / 2 matchings.
+
+For each image-image matching, the camera location is the camera center of the pin-hole camera model, and a pair of images forms an epipolar geometry. If we call these two images Left and Right, and camera centers of the two images form a line from image Left to image Right and intersects each image at a point called Epipole. The Epipole on image Left is the pixel coordinate (xL, yL) of camera center Right on image Left, and the Epipole on image Right is the pixel coordinate (xR, yR) of camera center Left on image Right. 
+
+In pin-hole camera model, a pixel coordinate on an image represents a set of points lying on the ray light from camera center toward that point in 3D (and goes on to infinity). With another camera viewing the same scene, we can see that line, or in other words, a point in one camera is transferable into a line in another camera in epipolar geometry, this line is corresponding line. All the corresponding lines have a common property, they all go through the Epipole, that is, given all points on image Left, we can project all corresponding lines on image Right, and all these corresponding lines intersect at Epipole Right on image Right, and similarly for Epipole Left on image Left. In order to find corresponding lines from image points in pixel coordinate, we need first to find the fundamental matrix of the epipolar geometry. This fundamental matrix is a rank-2 3x3 matrix that represents the relative pose (translation + rotation) of image Left and right Right (or vice versa) as well as the intrinsic parameters of two camera. It has 7 parameters, 2 for each Epipole, and 3 for the homography that relates the two image planes. The convenient property of fundamental matrix is that it can be calculated from sufficient corresponding points. Corresponding points are pixel points appear on two images that are pointing to the same 3D real-world point.
+
+With all that theory established, our problem of connecting panoramas into a virtual walkthrough now comes down to finding corresponding points on each slice image pair of the two panoramas. For this task, we resort to feature matching, which is a robust approach for dynamic views. The matching consists of three main steps, feature detection and feature matching and feature pruning. Feature detection is the process of running pre-defined feature filters on an image to discover features that are discriminative and view invariant (for example corners or edges). OpenCV has implementation for a collection of robust local features for FAST, STAR, SIFT, SURF, ORB, BRISK, MSER, GFTT, HARRIS, Dense, SimpleBlob
+
+![Local features detected from the two images](/public/images/cv2-pano-keypoint-detection.png)
+
 
 #### Feature detection
+The idea of finding 
 This is straightforward using OpenCV, the idea is to find all interest points in the two local views of the pano pairs. OpenCV provides a great set of robust local features like ORB, SIFT.
 
 #### Feature matching and pruning
@@ -52,7 +69,7 @@ Once the set of miminal corresponding pairs is found, we can find fundamental ma
 
 ## Practical implementation discussion
 - Tweaking the number of slices
-- Pair matching
+- Pair matching - local match using only 4 views instead of 6 views
 - Number of features
 - Number of matches
 
