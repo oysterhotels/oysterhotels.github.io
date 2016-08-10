@@ -27,12 +27,12 @@ Set of equirectangular panoramas as input
 ### Disintegrating local views - Pano-pano matching
 A 360 panorama is a representation of a sphere which center is at the camera location. Two 360 panoramas are connected when the camera location of one panorama is inside the scene of the other panorama. In order to find out if two panoramas are connected, we need to look for camera position on one panorama in the other panorama. The original equirectangular format of input panorama can be divided into 6 non-overlapping local views representing the Up, Down, Left, Right, Front, and Back side of the cube covering the 360 sphere of the panorama scene. This division enables us to use epipolar geometry of two image planes sharing overlapping views to find epipoles, which are camera positions in our case.
 
-Spliting equirectangular panorama into 6 planar sides
-![Spliting equirectangular panorama into 6 planar sides](/public/images/cv2-pano-disintegrating.png)
-
+Spliting equirectangular panorama into 6 planar sides using krpano
 ```python
 krpanotools64.exe makepano image.tif normal.config
 ```
+
+![Spliting equirectangular panorama into 6 planar sides](/public/images/cv2-pano-disintegrating.png)
 
 Epipolar geometry is commonly used when there are multiple image views sharing overlaps, as long as enough (7+) corresponding points (points that appear in both image views) are detected in two scenes, a fundamental matrix can be found to describe the intrinsic projective geometry between two views. [OpenCV](http://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html) provides all convenient methods to find fundamental matrix and epipoles from corresponding points, and those are what we are gonna use for our purpose.
 
@@ -51,12 +51,21 @@ For each image-image matching, the camera location is the camera center of the p
 
 In pin-hole camera model, a pixel coordinate on an image represents a set of points lying on the ray light from camera center toward that point in 3D (and goes on to infinity). With another camera viewing the same scene, we can see that line, or in other words, a point in one camera is transferable into a line in another camera in epipolar geometry, this line is corresponding line. All the corresponding lines have a common property, they all go through the Epipole, that is, given all points on image Left, we can project all corresponding lines on image Right, and all these corresponding lines intersect at Epipole Right on image Right, and similarly for Epipole Left on image Left. In order to find corresponding lines from image points in pixel coordinate, we need first to find the fundamental matrix of the epipolar geometry. This fundamental matrix is a rank-2 3x3 matrix that represents the relative pose (translation + rotation) of image Left and right Right (or vice versa) as well as the intrinsic parameters of two camera. It has 7 parameters, 2 for each Epipole, and 3 for the homography that relates the two image planes. The convenient property of fundamental matrix is that it can be calculated from sufficient corresponding points. Corresponding points are pixel points appear on two images that are pointing to the same 3D real-world point.
 
-With all that theory established, our problem of connecting panoramas into a virtual walkthrough now comes down to finding corresponding points on each slice image pair of the two panoramas. For this task, we resort to feature matching, which is a robust approach for dynamic views. The matching consists of three main steps, feature detection and feature matching and feature pruning. 
+With all those theories established, our problem of connecting panoramas into a virtual walkthrough now comes down to finding corresponding points on each slice image pair of the two panoramas. For this task, we resort to feature matching, which is a robust approach for dynamic views. The matching consists of three main steps, feature detection and feature matching and feature pruning. 
+
 
 
 
 #### Feature detection
 Feature detection is the process of running pre-defined feature filters on an image to discover features that are discriminative and view invariant (for example point at corners or edges where ). OpenCV has implementation for a collection of robust local features such as FAST, STAR, SIFT, or SURF (please check out [OpenCV's documentation](http://docs.opencv.org/3.1.0/db/d27/tutorial_py_table_of_contents_feature2d.html#gsc.tab=0) for more available feature detectors)
+
+An example of how SIFT can be used for detecting local features is (Note: Since SIFT and SURF are patented feature, you can switch this to ORB for production code to avoid license fee)
+
+```python
+detector = cv2.xfeatures2d.SIFT_create(nfeatures=2000, nOctaveLayers=3, contrastThreshold=0.03, edgeThreshold=10, sigma=1.6)
+kp, des = detector.detectAndCompute(self.image, self.mask)
+```
+
 
 The following figure shows the result of our feature detection process on two images, one from each panorama, local features are drawn in different colors, and as we can see they are mostly detected on corners and edges, and some features seem to be detected on both paranomas, those are the corresponding points that we are looking for. 
 
