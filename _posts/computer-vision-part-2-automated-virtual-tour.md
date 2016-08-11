@@ -24,7 +24,7 @@ Our process starts with a set of HDR panoramas as input, finds the panoramas tha
 Set of equirectangular panoramas as input
 ![Set of equirectangular panoramas as input](/public/images/cv2-pano-set.png)
 
-![Automated process for generating virtual tour](cv2-virtual-tour-process.png)
+![Automated process for generating virtual tour](/public/images/cv2-virtual-tour-process.png)
 
 ### Disintegrating local views - Pano-pano matching
 A 360 panorama is a representation of a sphere which center is at the camera location. Two 360 panoramas are connected when the camera location of one panorama is inside the scene of the other panorama. In order to find out if two panoramas are connected, we need to look for camera position on one panorama in the other panorama. The original equirectangular format of input panorama can be divided into 6 non-overlapping local views representing the Up, Down, Left, Right, Front, and Back side of the cube covering the 360 sphere of the panorama scene. This division enables us to use epipolar geometry of two image planes sharing overlapping views to find epipoles, which are camera positions in our case.
