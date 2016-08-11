@@ -86,10 +86,24 @@ In this context, number of trees, traversal checks, and number of k nearest neig
 
 ![Feature matching results](/public/images/cv2-pano-keypoint-matching.png) 
 
-
 #### Feature pruning
-Feature pruning is the actual step that brings robustness to our problem. We do not want to miss out any important features, so we include as many features as we can in our previous step, but at the same time, we want to narrow down to only important features using pruning techniques.
-There are 3 main pruning filters that we apply in our approach, first by ratio check, recommended by David Lowe's used for his SIFT feature, the second is crosscheck, meaning one match is valid when there exists the match from the other view to this view too, the third pruning filter is the check for spatial relativeness, and main angle difference (does ORB have this?)
+Feature pruning is a series of filters being applied onto matched features, to filter out features that have passed through our previous matching process (which was purely based on similarity in appearance) but are not the exact corresponding features. These wrongly matched features are actually very common, most of the time they are features on similar or the same objects (e.g. features on the brick wall do share the same appearance across the whole wall, features on 2 different corners of the board do have similar appearance, just a rotated version of each other), or features that are noise (those are normally random dots on clean backgrounds that appear so frequently that there are many matches of these, with similar matching distance).
+
+A successful feature matching system is mostly determined by how well feature pruning is implemented, if it is too strict we might end up with insufficent matches, but if it is too loose that will not only increase our processing time but will return in incorrect matches for later phases.
+
+Pruning features should be designed based on the nature of the data. For our problem, there are 4 main pruning filters that can be used, which are ratio filter, cross-match filter, orientation consistency filter and spatial consistency filter.
+
+Ratio filter is designed to remove feature noise as mentioned above, the idea is, given all matches of a feature along with their similarity scores, a feature is determined as a feature noise when its best and second best match has too similar similarity scores. Again, if a feature can be matched with similar confidence to 2 different features, that feature is considered as a feature noise (e.g. a random dot on a wall could be matched with similar confidence with other random dots). This filter checks for the ratio of similarity score between the second best match and the best match, that ratio has to fall under a certain value for that feature and that match to be valid. This pruning technique was first proposed by David Lowe (the author of SIFT feature) using 0.7 as ratio threshold, but this type of filter could be used effectively with any features that have explicit similarity scores.
+
+Cross-match filter is checking for mutual matching result of a pair of features, in other words, 2 features are considered to be correctly matched when each feature appears in the match list of the other feature. 
+
+Orientation consistency filter is specific for our particular problem where there are no rotation in the transformation of one image into another, that is, given the cameras are placed and locked on tripod when taking the photo, that results in images having same upright orientation wherever the tripod is placed. This filter checks for the dominant orientation of the feature and its match to see if they are close. This filter can be applied on any feature detector that calculates dominant orientation.
+
+Spatial consistency filter is similar to orientation consistency, because image orientation is preserved between different shots, relative spatial relationship between filters are preserved, and this filter checks if a feature and its match keeps this relationship.
+
+The following figure shows the result of feature pruning process after 4 filters have been applied, those features indicate a more clean and accurate match than the first matching set we obtained from pure appearance comparison.
+
+![Feature pruning results](/public/images/cv2-pano-match-inliers.png) 
 
 #### Epipole estimating
 
