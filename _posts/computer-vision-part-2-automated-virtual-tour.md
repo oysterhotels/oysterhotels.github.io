@@ -54,9 +54,9 @@ In pin-hole camera model, a pixel coordinate on an image represents a set of poi
 With all those theories established, our problem of connecting panoramas into a virtual walkthrough now comes down to finding corresponding points on each slice image pair of the two panoramas. For this task, we resort to feature matching, which is a robust approach for dynamic views. The matching consists of three main steps, feature detection and feature matching and feature pruning. 
 
 
+#### Finding corresponding points
 
-
-#### Feature detection
+##### Feature detection
 Feature detection is the process of running pre-defined feature filters on an image to discover features that are discriminative and view invariant (for example point at corners or edges where ). OpenCV has implementation for a collection of robust local features such as FAST, STAR, SIFT, or SURF (please check out [OpenCV's documentation](http://docs.opencv.org/3.1.0/db/d27/tutorial_py_table_of_contents_feature2d.html#gsc.tab=0) for more available feature detectors)
 
 An example of how SIFT can be used for detecting local features is (Note: Since SIFT and SURF are patented feature, you should use other free features provided by OpenCV to avoid license fee)
@@ -106,6 +106,8 @@ The following figure shows the result of feature pruning process after 4 filters
 ![Feature pruning results](/public/images/cv2-pano-match-inliers.png) 
 
 #### Epipole estimating
+
+
 
 Once the set of miminal corresponding pairs is found, we can find fundamental matrix using RANSAC technique, which iteratively picks a subset inliners and project the model on the rest, the outliers.
 
