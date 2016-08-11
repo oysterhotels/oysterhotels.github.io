@@ -105,9 +105,30 @@ The following figure shows the result of feature pruning process after 4 filters
 
 ![Feature pruning results](/public/images/cv2-pano-match-inliers.png) 
 
-### Finding hotspots location
+### Find hotspot location in local coordinate
 
-The corresponding features detected from two images are then used to find 
+The corresponding features detected from two images are then used to find hotspot location in local coordinate, this is done in three steps, first to find the fundamental matrix of the epipolar geometry constructed from these two sets of corresponding points, then use the fundamental matrix and the two sets of features to find a set of corresponding lines on each image, and lastly interesections of corresponding lines on each image are derived as the epipoles or camera locations in local planar coordinate.
+
+As discussed previously, fundamental matrix in epipolar geometry can be estimated based solely of a set of coordinates (with at least 8 corresponding pairs). A robust approach towards finding fundamental matrix is by using RANSAC (Random sample consensus) technique, which is an iterative process where at each iteration, a random subset of the corresponding pairs are chosen as the "inliers" to construct the sample fundamental matrix, the rest of the corresponding pairs are then treated as test samples, where the sample fundamental matrix is used to find estimated corresponding points of the test set, which is then compared with the actual corresponding points of the test set to find inliers in the test set, which is then used as the measure for this sample pick. The best sample fundamental matrix is then chosen and returned. The following code shows how it is done in OpenCV (here fundamental_mask is used to trace back on original matches to locate inlier (or valid) matches).
+
+```python
+fundamental_mat, fundamental_mask = cv2.findFundamentalMat(valid_matches_left, valid_matches_right, cv2.FM_RANSAC)
+```
+
+Given the fundamental matrix, we can then calculate the epilines on the other image for every inlier point from one image.
+
+```python
+valid_matches_left = valid_matches_left[fundamental_mask.ravel() == 1]
+valid_matches_right = valid_matches_right[fundamental_mask.ravel() == 1]
+epilines_left = cv2.computeCorrespondEpilines(valid_matches_right.reshape(-1, 1, 2), 2, fundamental_mat)
+epilines_right = cv2.computeCorrespondEpilines(valid_matches_left.reshape(-1, 1, 2), 2, fundamental_mat)
+```
+
+Once epilines are detected, epipole is then derived as the intersection of those epilines, and epipoles that fall within the image boundaries are valid. The estimated epipoles indicate the ray that two cameras are connected, so it could go from one image to another or vice versa. As we need to identify whether we can navigate from one image to another, we use the concept of far-near relationship to describe the 2 images. Given 2 images are showing the same scene, there is one image is closer to the scene than the other image, that is the requirement for valid epipole to be found within image boundary, and the navigation will only happen from the far image to the close image, in order words we are looking for the far image as its epipole is the hotspot we are finding. In order to find out which image is further from the scene, we use the average distance all all inlier features to its mean location (in both horizontal and vertical dimension). Image with smaller average distance is the image further away from the scene.
+
+![Correct hotspon estimation](/public/images/cv2-pano-hotspot-estimation.png) 
+
+Out of all possible local view matches (16 matches for 4 view consideration - LEFT, RIGHT, FRONT, BACK - or 36 matches for 6 local view consideration - including TOP, DOWN) we should ideally end up with 2 epipole locations, the first one to go from one panorama to the other, and the second one to go back from the other panorama. However, in practice we normally end up with more than 2 valid epipoles, therefore we propose a metric called average vertical distance to rank pairs of epipoles in terms of correctness. Average vertical distance is the average of the distance from the two estimated epipoles to the middle lines. In theory, given the camera tripod is at the same level everywhere, the epipoles should always reside on the middle of the image, so we can use this property to find the best epipole pair that has minimum distance to the middle lines of the images.
 
 
 Once the set of miminal corresponding pairs is found, we can find fundamental matrix using RANSAC technique, which iteratively picks a subset inliners and project the model on the rest, the outliers.
@@ -119,6 +140,7 @@ Once the set of miminal corresponding pairs is found, we can find fundamental ma
 - Number of features, coarse-to-fine structure
 - Number of matches
 - Free vs non-free (SIFT, SURF)
+- Metrics to find best hotspot
 
 
 
