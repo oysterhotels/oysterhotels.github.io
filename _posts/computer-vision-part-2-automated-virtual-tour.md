@@ -24,6 +24,8 @@ Our process starts with a set of HDR panoramas as input, finds the panoramas tha
 Set of equirectangular panoramas as input
 ![Set of equirectangular panoramas as input](/public/images/cv2-pano-set.png)
 
+![Automated process for generating virtual tour](cv2-virtual-tour-process.png)
+
 ### Disintegrating local views - Pano-pano matching
 A 360 panorama is a representation of a sphere which center is at the camera location. Two 360 panoramas are connected when the camera location of one panorama is inside the scene of the other panorama. In order to find out if two panoramas are connected, we need to look for camera position on one panorama in the other panorama. The original equirectangular format of input panorama can be divided into 6 non-overlapping local views representing the Up, Down, Left, Right, Front, and Back side of the cube covering the 360 sphere of the panorama scene. This division enables us to use epipolar geometry of two image planes sharing overlapping views to find epipoles, which are camera positions in our case.
 
@@ -39,7 +41,7 @@ Epipolar geometry is commonly used when there are multiple image views sharing o
 Epipolar geometry - positions of epipoles e and e' are the camera locations of the 2 views in each other's image
 ![Epipolar geometry](/public/images/cv2-pano-epipolar.png)
 
-### Matching and finding pano links - local view matching
+### Finding corresponding points
 
 In this step, we will be finding corresponding points and then camera positions for each pano view. Corresponding points are the pairs of points, one from each image view and both display the same point in real-world. There are 3 substeps in this process, we first find a set of points of interest in each image (those points of interest normally represent corners, edges or discriminative patterns in each image view), then we use the region around each point to estimate if two points are displaying the same real-world point, then corresponding points are used to estimate the camera locations.
 
@@ -54,9 +56,7 @@ In pin-hole camera model, a pixel coordinate on an image represents a set of poi
 With all those theories established, our problem of connecting panoramas into a virtual walkthrough now comes down to finding corresponding points on each slice image pair of the two panoramas. For this task, we resort to feature matching, which is a robust approach for dynamic views. The matching consists of three main steps, feature detection and feature matching and feature pruning. 
 
 
-#### Finding corresponding points
-
-##### Feature detection
+#### Feature detection
 Feature detection is the process of running pre-defined feature filters on an image to discover features that are discriminative and view invariant (for example point at corners or edges where ). OpenCV has implementation for a collection of robust local features such as FAST, STAR, SIFT, or SURF (please check out [OpenCV's documentation](http://docs.opencv.org/3.1.0/db/d27/tutorial_py_table_of_contents_feature2d.html#gsc.tab=0) for more available feature detectors)
 
 An example of how SIFT can be used for detecting local features is (Note: Since SIFT and SURF are patented feature, you should use other free features provided by OpenCV to avoid license fee)
@@ -105,8 +105,9 @@ The following figure shows the result of feature pruning process after 4 filters
 
 ![Feature pruning results](/public/images/cv2-pano-match-inliers.png) 
 
-#### Epipole estimating
+### Finding hotspots location
 
+The corresponding features detected from two images are then used to find 
 
 
 Once the set of miminal corresponding pairs is found, we can find fundamental matrix using RANSAC technique, which iteratively picks a subset inliners and project the model on the rest, the outliers.
