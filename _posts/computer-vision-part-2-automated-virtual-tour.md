@@ -59,13 +59,14 @@ With all those theories established, our problem of connecting panoramas into a 
 #### Feature detection
 Feature detection is the process of running pre-defined feature filters on an image to discover features that are discriminative and view invariant (for example point at corners or edges where ). OpenCV has implementation for a collection of robust local features such as FAST, STAR, SIFT, or SURF (please check out [OpenCV's documentation](http://docs.opencv.org/3.1.0/db/d27/tutorial_py_table_of_contents_feature2d.html#gsc.tab=0) for more available feature detectors)
 
-An example of how SIFT can be used for detecting local features is (Note: Since SIFT and SURF are patented feature, you can switch this to ORB for production code to avoid license fee)
+An example of how SIFT can be used for detecting local features is (Note: Since SIFT and SURF are patented feature, you should use other free features provided by OpenCV to avoid license fee)
 
 ```python
-detector = cv2.xfeatures2d.SIFT_create(nfeatures=2000, nOctaveLayers=3, contrastThreshold=0.03, edgeThreshold=10, sigma=1.6)
+detector = cv2.xfeatures2d.SIFT_create(nfeatures=2000, nOctaveLayers=3, 
+    contrastThreshold=0.03, edgeThreshold=10, sigma=1.6)
 kp, des = detector.detectAndCompute(self.image, self.mask)
 ```
-
+In the code above, there are 2 paramas that are quite important, nfeatures and contrastThreshold, reducing contrast threshold or increasing number of maximum features will give us more features, and vice versa. Those values should be chosen based on the nature of image data that we are dealing with, and the focus of our detection process. In our case, the distance between camera locations in real-world coordinate is unknown, which could be too far so a more appropriate design is to extract as many features as we can at detection phase, then in feature matching and pruning phase we will filter out irrelevant features. More practical decisions like this will be discussed later in our last section, along with our coarse-to-fine approach to efficiently extract features at constrained processing time.
 
 The following figure shows the result of our feature detection process on two images, one from each panorama, local features are drawn in different colors, and as we can see they are mostly detected on corners and edges, and some features seem to be detected on both paranomas, those are the corresponding points that we are looking for. 
 
@@ -74,9 +75,16 @@ The following figure shows the result of our feature detection process on two im
 #### Feature matching 
 At each location where the feature is detected, a set of attributes are extracted to define that feature, they are called feature descriptors, some of the most common feature descriptors implemented in OpenCV are SIFT, SURF, HOG, BRIEF, BRISK, again please refer to [OpenCV's documentation](http://docs.opencv.org/3.1.0/db/d27/tutorial_py_table_of_contents_feature2d.html#gsc.tab=0) for more available feature descriptors. Those descriptors can be seen as a normalized (orientation-wise) vectorized aggregation (spatial-wise) of primitive filter response (e.g. SIFT descriptor gives a 128-dimensional vector aggregated from 4 x 4 location bins in left-right top-down spatial order, each bin is represented by accumulated gradients grouped in 8 orientation bins).
 
-Featue matching is the process of 
+Featue matching is the process of finding the same set of features that appear in both images given feature descriptors (in forms for multidimensional vectors). Given ten of thousands of features being detected in each image, an efficient matching approach is to use kd-tree (k dimensional binary tree) to first index all features of one image and matching with features from the other image can then be done by traversing the indexed trees. In order to minimized false negatives in matching, knn (finding the nearest k matches for each feature) is also used. All those theories can be done with OpenCV API in 2 lines of code
 
+```python
+matcher = cv2.FlannBasedMatcher(dict(algorithm=FLANN_INDEX_KDTREE, trees=5), dict(checks=50))
+matches = matcher.knnMatch(self.pano_image_from.des, self.pano_image_to.des, k=2)
+```
 
+In this context, number of trees, traversal checks, and number of k nearest neighbors are chosen based on accuracy-time tradeoffs in our particular applications. The following figure shows the result of this matching step, as we can see in this design we aim to reduce false negative matches so more matches are returned than needed, those matches will be cleaned up in the following feature pruning section.
+
+![Feature matching results](/public/images/cv2-pano-keypoint-matching.png) 
 
 
 #### Feature pruning
