@@ -41,6 +41,8 @@ Epipolar geometry is commonly used when there are multiple image views sharing o
 Epipolar geometry - positions of epipoles e and e' are the camera locations of the 2 views in each other's image
 ![Epipolar geometry](/public/images/cv2-pano-epipolar.png)
 
+![Correct hotspot estimation](/public/images/cv2-pano-epipolar-topdown.png) 
+
 ### Finding corresponding points
 
 In this step, we will be finding corresponding points and then camera positions for each pano view. Corresponding points are the pairs of points, one from each image view and both display the same point in real-world. There are 3 substeps in this process, we first find a set of points of interest in each image (those points of interest normally represent corners, edges or discriminative patterns in each image view), then we use the region around each point to estimate if two points are displaying the same real-world point, then corresponding points are used to estimate the camera locations.
@@ -128,11 +130,11 @@ Once epilines are detected, epipole is then derived as the intersection of those
 
 ![Correct hotspon estimation](/public/images/cv2-pano-hotspot-estimation.png) 
 
-Out of all possible local view matches (16 matches for 4 view consideration - LEFT, RIGHT, FRONT, BACK - or 36 matches for 6 local view consideration - including TOP, DOWN) we should ideally end up with 2 epipole locations, the first one to go from one panorama to the other, and the second one to go back from the other panorama. However, in practice we normally end up with more than 2 valid epipoles, therefore we propose a metric called average vertical distance to rank pairs of epipoles in terms of correctness. Average vertical distance is the average of the distance from the two estimated epipoles to the middle lines. In theory, given the camera tripod is at the same level everywhere, the epipoles should always reside on the middle of the image, so we can use this property to find the best epipole pair that has minimum distance to the middle lines of the images.
+Out of all possible local view matches (16 matches for 4 view consideration - LEFT, RIGHT, FRONT, BACK - or 36 matches for 6 local view consideration - including TOP, DOWN) we should ideally end up with 2 epipole locations, the first one to go from one panorama to the other, and the second one to go back from the other panorama. However, in practice we normally end up with more than 2 valid epipoles, we use a metric called average vertical distance to rank pairs of epipoles in terms of correctness. Average vertical distance is the average of the distance from the two estimated epipoles to the middle lines. In theory, given the camera tripod is at a fixed height level, the epipoles should always reside on the middle of the image, so we can use this property to find the best epipole pair that has the minimum distance to the middle lines of the images. Using this metric, we are then be able to locate the best hotspot in all matches from one pano to the other pano (E1 in Figure Epipolar Top-Down), in turns help us decide the opposite hotspot on the other side of the spherical cube from the other pano back (E2 in Figure Epipolar Top-Down)
 
+### Transform local to spherical coordinate
 
-Once the set of miminal corresponding pairs is found, we can find fundamental matrix using RANSAC technique, which iteratively picks a subset inliners and project the model on the rest, the outliers.
-
+Once the location of hotspots in local planar coordinate are found, we can derive global planar coordinate based on the index of the local view plane,  then spherical coordinate can be calculated.
 
 ## Practical implementation discussion
 - Tweaking the number of slices
