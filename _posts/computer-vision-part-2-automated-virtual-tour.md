@@ -149,7 +149,10 @@ So far we have presented a complete workflow to generate virtual tours automatic
 * Free vs. non-free: One important note about feature choice is the extra cost involved in using non-free features (SIFT, SURF), for production code it is best to consider the tradeoffs between accuracy, processing time and cost to make sure you pick the most suitable feature type for your application.
 
 ## Results and summary
-Here are some of the virtual tours we generated from the approach we just described.
+
+In this post, we have presented the complete workflow to create virtual tour using Computer Vision techniques, using local feature matching and epipolar geometry. We also discussed some practical notes about implementing such system for production scale. Together with HDR panoramas that we presented in [Part 1](http://tech.oyster.com/computer-vision-part-1-hdr-panorama), we can create high quality virtual tours to boost up user experience and engagement on our sites. Again, if you have not checked out our previous part where we talked about how High Dynamic Range panoramas are created at large scale, please [check it out](http://tech.oyster.com/computer-vision-part-1-hdr-panorama), in the next and last part of this Computer Vision series, we will show you how to integrate smart features like mini-maps or dynamic mouse arrows into your virtual tours. 
+
+Here are some of the virtual tours generated from the approach we just described.
 
 [Dream Downtown Lobby](https://www.oyster.com/new-york-city/hotels/dream-downtown/all-tours/lobby--v22596/)
 ![cv2-wt-dream-downtown-lobby](/public/images/cv2-wt-dream-downtown-lobby.png)
@@ -170,7 +173,6 @@ Here are some of the virtual tours we generated from the approach we just descri
 
 ![cv2-wt-trump-soho-penthouse](/public/images/cv2-wt-trump-soho-penthouse.png)
 
-In this post, we have presented the complete workflow to create virtual tour using Computer Vision techniques, using local feature matching and epipolar geometry. We also discussed some practical notes about implementing such system for production scale. Together with HDR panoramas that we presented in Part 1, we can create high quality virtual tours to boost up user experience and engagement on our sites. Again, if you have not checked out our previous part where we talked about how High Dynamic Range panoramas are created at large scale, please check it out, in the next part of this Computer Vision series, we will show you how to integrate smart features like mini-maps or dynamic mouse arrows to your virtual tours. 
 
 ### About the author:
 Tuan Thi is a Senior Software Engineer in Computer Vision at [Oyster](https://www.oyster.com).com, part of Smarter Travel Media Group, at TripAdvisor. He finished his PhD in Computer Vision and Machine Learning in 2011.  Before joining TripAdvisor, he was a research engineer and computer vision scientist at Canon Research and Placemeter Ltd. with various international publications and patents in the field of local features, structured learning and deep learning.
