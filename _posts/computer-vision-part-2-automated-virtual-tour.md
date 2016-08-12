@@ -132,19 +132,23 @@ Once epilines are detected, epipole is then derived as the intersection of those
 
 Out of all possible local view matches (16 matches for 4 view consideration - LEFT, RIGHT, FRONT, BACK - or 36 matches for 6 local view consideration - including TOP, DOWN) we should ideally end up with 2 epipole locations, the first one to go from one panorama to the other, and the second one to go back from the other panorama. However, in practice we normally end up with more than 2 valid epipoles, we use a metric called average vertical distance to rank pairs of epipoles in terms of correctness. Average vertical distance is the average of the distance from the two estimated epipoles to the middle lines. In theory, given the camera tripod is at a fixed height level, the epipoles should always reside on the middle of the image, so we can use this property to find the best epipole pair that has the minimum distance to the middle lines of the images. Using this metric, we are then be able to locate the best hotspot in all matches from one pano to the other pano (E1 in Figure Epipolar Top-Down), in turns help us decide the opposite hotspot on the other side of the spherical cube from the other pano back (E2 in Figure Epipolar Top-Down)
 
+![Correct hotspon back](/public/images/cv2-pano-hotspot-estimation-backward.png) 
+
 ### Transform local to spherical coordinate
 
-Once the location of hotspots in local planar coordinate are found, we can derive global planar coordinate based on the index of the local view plane,  then spherical coordinate can be calculated.
+Once the location of hotspots in local planar coordinate are found, we can derive global planar coordinate based on the index of the local view plane, then spherical coordinate can be calculated based on panorama's size and field of view
 
-## Practical implementation discussion
-- Tweaking the number of slices
-- Pair matching - local match using only 4 views instead of 6 views
-- Number of features, coarse-to-fine structure
-- Number of matches
-- Free vs non-free (SIFT, SURF)
-- Metrics to find best hotspot
+![Correct hotspon back](/public/images/cv2-pano-hotspot-integrating.png) 
 
+## Practical implementation tips and tricks
+⋅⋅* Tweaking the number of slices
+⋅⋅* Pair matching - local match using only 4 views instead of 6 views
+⋅⋅* Number of features, coarse-to-fine structure
+⋅⋅* Number of matches
+⋅⋅* Free vs non-free (SIFT, SURF)
+⋅⋅* Metrics to find best hotspot
 
+## Results and summary
 
 In this post, we have presented our approach to generating HDR panorama at large scale using available packages like DNGConverter, DCRAW, SNS-HDR, PTGui, and with the help from Computer Vision techniques with OpenCV. Please feel free to visit our website [Oyster](https://www.oyster.com) to see our rich collection of hotel panoramas all around the world. Also, please stay tuned for part 2 and 3 of this Computer Vision series, where we will show you how virtual tour can be generated (again fully automated at large scale) from a set of panoramas, and how smart features like mini-maps can be added to your tour to improve user experience.
 
