@@ -141,12 +141,12 @@ Once the location of hotspots in local planar coordinate are found, we can deriv
 ![Correct hotspon back](/public/images/cv2-pano-hotspot-integrating.png) 
 
 ## Practical implementation tips and tricks
-⋅⋅* Tweaking the number of slices
-⋅⋅* Pair matching - local match using only 4 views instead of 6 views
-⋅⋅* Number of features, coarse-to-fine structure
-⋅⋅* Number of matches
-⋅⋅* Free vs non-free (SIFT, SURF)
-⋅⋅* Metrics to find best hotspot
+* Tweaking the number of slices
+* Pair matching - local match using only 4 views instead of 6 views
+* Number of features, coarse-to-fine structure
+* Number of matches
+* Free vs non-free (SIFT, SURF)
+* Metrics to find best hotspot
 
 ## Results and summary
 
