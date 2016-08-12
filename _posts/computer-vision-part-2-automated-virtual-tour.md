@@ -27,7 +27,7 @@ Set of equirectangular panoramas as input
 ![Automated process for generating virtual tour](/public/images/cv2-virtual-tour-process.png)
 
 ### Disintegrating local views - Pano-pano matching
-A 360 panorama is a representation of a sphere which center is at the camera location. Two 360 panoramas are connected when the camera location of one panorama is inside the scene of the other panorama. In order to find out if two panoramas are connected, we need to look for camera position on one panorama in the other panorama. The original equirectangular format of input panorama can be divided into 6 non-overlapping local views representing the Up, Down, Left, Right, Front, and Back side of the cube covering the 360 sphere of the panorama scene. This division enables us to use epipolar geometry of two image planes sharing overlapping views to find epipoles, which are camera positions in our case.
+A 360 panorama is a representation of a sphere which center is at the camera location. Two 360 panoramas are connected when the camera location of one panorama is inside the scene of the other panorama. In order to find out if two panoramas are connected, we need to look for camera position on one panorama in the other panorama. The original equirectangular format of input panorama can be divided into 6 non-overlapping local views representing the Up, Down, Left, Right, Front, and Back side of the cube covering the 360 sphere of the panorama scene. This division enables us to use epipolar geometry of two image planes sharing overlapping views to find epipoles, which are camera positions in our case. We leave out UP and Down views since they do not contain hotspots for virtual tour.
 
 Spliting equirectangular panorama into 6 planar sides using krpano
 ```python
@@ -141,16 +141,21 @@ Once the location of hotspots in local planar coordinate are found, we can deriv
 ![Correct hotspon back](/public/images/cv2-pano-hotspot-integrating.png) 
 
 ## Practical implementation tips and tricks
-* Tweaking the number of slices
-* Pair matching - local match using only 4 views instead of 6 views
-* Number of features, coarse-to-fine structure
-* Number of matches
-* Free vs non-free (SIFT, SURF)
-* Metrics to find best hotspot
+So far we have presented a complete workflow to generate virtual tours automatically using OpenCV and Krpano. There are few additional points that we might take into consideration when trying to implement this workflow for production scale.
+ 
+* Local view matching: an alternative to running all 4 x 4 local views matching, we can use the result one view against other 4 views to decide we need to carry out the rest of the matches
+* Coarse-to-fine framework for feature detection and feature matching: the number of features detected and matched is proportional to processing time and accuracy, so we derived a coarse-to-fine framework with 3 layers going from small number of features (coarse layer) to large number of features (fine layer). Only when some good matches are identified at a coarser level, we can move on to the finer level. This type of framework reduces greatly processing time while still maintains high accuracy in matching.
+* Metrics to find best hotspot: in this context we use the average distance to the horizon line of the image as the metric to find best epipole location, but that metric could also be other estimators that work best for the scenario, for example good feature ratio (ratio of final inlier feature counts on all detected features), or the amount of inliners found...
+* Free vs. non-free: One important note about feature choice is the extra cost involved in using non-free features (SIFT, SURF), for production code it is best to consider the tradeoffs between accuracy, processing time and cost to make sure you pick the most suitable feature type for your application.
 
 ## Results and summary
+Here are some of the virtual tours we generated from the approach we just described.
 
-In this post, we have presented our approach to generating HDR panorama at large scale using available packages like DNGConverter, DCRAW, SNS-HDR, PTGui, and with the help from Computer Vision techniques with OpenCV. Please feel free to visit our website [Oyster](https://www.oyster.com) to see our rich collection of hotel panoramas all around the world. Also, please stay tuned for part 2 and 3 of this Computer Vision series, where we will show you how virtual tour can be generated (again fully automated at large scale) from a set of panoramas, and how smart features like mini-maps can be added to your tour to improve user experience.
+[cv2-wt-dream-downtown-lobby](https://www.oyster.com/new-york-city/hotels/dream-downtown/all-tours/lobby--v22596/)
+![cv2-wt-dream-downtown-lobby](/public/images/cv2-wt-dream-downtown-lobby.png)
+
+
+In this post, we have presented the complete workflow to create virtual tour using Computer Vision techniques, using local feature matching and epipolar geometry. We also discussed some practical notes about implementing such system for production scale. Together with HDR panoramas that we presented in Part 1, we can create high quality virtual tours to boost up user experience and engagement on our sites. Again, if you have not checked out our previous part where we talked about how High Dynamic Range panoramas are created at large scale, please check it out, in the next part of this Computer Vision series, we will show you how to integrate smart features like mini-maps or dynamic mouse arrows to your virtual tours. 
 
 ### About the author:
 Tuan Thi is a Senior Software Engineer in Computer Vision at [Oyster](https://www.oyster.com).com, part of Smarter Travel Media Group, at TripAdvisor. He finished his PhD in Computer Vision and Machine Learning in 2011.  Before joining TripAdvisor, he was a research engineer and computer vision scientist at Canon Research and Placemeter Ltd. with various international publications and patents in the field of local features, structured learning and deep learning.
