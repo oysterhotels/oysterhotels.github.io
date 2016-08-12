@@ -151,9 +151,24 @@ So far we have presented a complete workflow to generate virtual tours automatic
 ## Results and summary
 Here are some of the virtual tours we generated from the approach we just described.
 
-[cv2-wt-dream-downtown-lobby](https://www.oyster.com/new-york-city/hotels/dream-downtown/all-tours/lobby--v22596/)
+[Dream Downtown Lobby](https://www.oyster.com/new-york-city/hotels/dream-downtown/all-tours/lobby--v22596/)
 ![cv2-wt-dream-downtown-lobby](/public/images/cv2-wt-dream-downtown-lobby.png)
 
+[Gansevoort The Chester](https://www.oyster.com/new-york-city/hotels/gansevoort-meatpacking-nyc/all-tours/the-chester--v18296/)
+![cv2-wt-gansevoort-the-chester](/public/images/cv2-wt-gansevoort-the-chester.png)
+
+[Holiday Inn Montego Main Pool](https://www.oyster.com/jamaica/hotels/holiday-inn-resort-montego-bay/all-tours/main-pool--v24936/)
+![cv2-wt-holiday-inn-montego-main-pool](/public/images/cv2-wt-holiday-inn-montego-main-pool.png)
+
+[Refinery Hotel Rooftop](https://www.oyster.com/new-york-city/hotels/the-refinery-hotel/all-tours/refinery-rooftop--v19460/)
+![cv2-wt-refinery-hotel-rooftop](/public/images/cv2-wt-refinery-hotel-rooftop.png)
+
+[Scrub Island North Beach](https://www.oyster.com/virgin-islands/hotels/scrub-island-resort-spa-and-marina-autograph-collection/all-tours/north-beach--v25717/)
+![cv2-wt-scrub-island-north-beach](/public/images/cv2-wt-scrub-island-north-beach.png)
+
+[Trump Soho Penthouse](https://www.oyster.com/new-york-city/hotels/trump-soho-new-york/all-tours/penthouse-suite--v24773/)
+
+![cv2-wt-trump-soho-penthouse](/public/images/cv2-wt-trump-soho-penthouse.png)
 
 In this post, we have presented the complete workflow to create virtual tour using Computer Vision techniques, using local feature matching and epipolar geometry. We also discussed some practical notes about implementing such system for production scale. Together with HDR panoramas that we presented in Part 1, we can create high quality virtual tours to boost up user experience and engagement on our sites. Again, if you have not checked out our previous part where we talked about how High Dynamic Range panoramas are created at large scale, please check it out, in the next part of this Computer Vision series, we will show you how to integrate smart features like mini-maps or dynamic mouse arrows to your virtual tours. 
 
