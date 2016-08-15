@@ -72,6 +72,7 @@ In the code above, there are 2 paramas that are quite important, nfeatures and c
 
 The following figure shows the result of our feature detection process on two images, one from each panorama, local features are drawn in different colors, and as we can see they are mostly detected on corners and edges, and some features seem to be detected on both paranomas, those are the corresponding points that we are looking for. 
 
+**Figure 6: Local features detected from the two images**
 ![Local features detected from the two images](/public/images/cv2-pano-keypoint-detection.png) 
 
 #### Feature matching 
@@ -86,6 +87,8 @@ matches = matcher.knnMatch(self.pano_image_from.des, self.pano_image_to.des, k=2
 
 In this context, number of trees, traversal checks, and number of k nearest neighbors are chosen based on accuracy-time tradeoffs in our particular applications. The following figure shows the result of this matching step, as we can see in this design we aim to reduce false negative matches so more matches are returned than needed, those matches will be cleaned up in the following feature pruning section.
 
+
+**Figure 7: Feature matching results**
 ![Feature matching results](/public/images/cv2-pano-keypoint-matching.png) 
 
 #### Feature pruning
@@ -105,6 +108,7 @@ Spatial consistency filter is similar to orientation consistency, because image 
 
 The following figure shows the result of feature pruning process after 4 filters have been applied, those features indicate a more clean and accurate match than the first matching set we obtained from pure appearance comparison.
 
+**Figure 8: Feature pruning results**
 ![Feature pruning results](/public/images/cv2-pano-match-inliers.png) 
 
 ### Find hotspot location in local coordinate
@@ -128,16 +132,20 @@ epilines_right = cv2.computeCorrespondEpilines(valid_matches_left.reshape(-1, 1,
 
 Once epilines are detected, epipole is then derived as the intersection of those epilines, and epipoles that fall within the image boundaries are valid. The estimated epipoles indicate the ray that two cameras are connected, so it could go from one image to another or vice versa. As we need to identify whether we can navigate from one image to another, we use the concept of far-near relationship to describe the 2 images. Given 2 images are showing the same scene, there is one image is closer to the scene than the other image, that is the requirement for valid epipole to be found within image boundary, and the navigation will only happen from the far image to the close image, in order words we are looking for the far image as its epipole is the hotspot we are finding. In order to find out which image is further from the scene, we use the average distance all all inlier features to its mean location (in both horizontal and vertical dimension). Image with smaller average distance is the image further away from the scene.
 
+
+**Figure 9: Hotspot estimation - forward**
 ![Correct hotspon estimation](/public/images/cv2-pano-hotspot-estimation.png) 
 
 Out of all possible local view matches (16 matches for 4 view consideration - LEFT, RIGHT, FRONT, BACK - or 36 matches for 6 local view consideration - including TOP, DOWN) we should ideally end up with 2 epipole locations, the first one to go from one panorama to the other, and the second one to go back from the other panorama. However, in practice we normally end up with more than 2 valid epipoles, we use a metric called average vertical distance to rank pairs of epipoles in terms of correctness. Average vertical distance is the average of the distance from the two estimated epipoles to the middle lines. In theory, given the camera tripod is at a fixed height level, the epipoles should always reside on the middle of the image, so we can use this property to find the best epipole pair that has the minimum distance to the middle lines of the images. Using this metric, we are then be able to locate the best hotspot in all matches from one pano to the other pano (E1 in Figure Epipolar Top-Down), in turns help us decide the opposite hotspot on the other side of the spherical cube from the other pano back (E2 in Figure Epipolar Top-Down)
 
+**Figure 10: Hotspot estimation - backward**
 ![Correct hotspon back](/public/images/cv2-pano-hotspot-estimation-backward.png) 
 
 ### Transform local to spherical coordinate
 
 Once the location of hotspots in local planar coordinate are found, we can derive global planar coordinate based on the index of the local view plane, then spherical coordinate can be calculated based on panorama's size and field of view
 
+**Figure 11: Projecting local coordinates to spherical coordinates**
 ![Correct hotspon back](/public/images/cv2-pano-hotspot-integrating.png) 
 
 ## Practical implementation tips and tricks
