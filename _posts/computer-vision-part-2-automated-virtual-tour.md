@@ -165,23 +165,22 @@ In this post, we have presented the complete workflow to create virtual tour usi
 
 Here are some of the virtual tours generated from the approach we just described, the links above each screenshot will lead you to our live walkthroughs on Oyster.com, with support for both desktop and mobile.
 
-[Dream Downtown Lobby](https://www.[Oyster.com](https://www.oyster.com)/new-york-city/hotels/dream-downtown/all-tours/lobby--v22596/)
+[Dream Downtown Lobby](https://www.oyster.com/new-york-city/hotels/dream-downtown/all-tours/lobby--v22596/)
 ![cv2-wt-dream-downtown-lobby](/public/images/cv2-wt-dream-downtown-lobby.png)
 
-[Gansevoort The Chester](https://www.[Oyster.com](https://www.oyster.com)/new-york-city/hotels/gansevoort-meatpacking-nyc/all-tours/the-chester--v18296/)
+[Gansevoort The Chester](https://www.oyster.com/new-york-city/hotels/gansevoort-meatpacking-nyc/all-tours/the-chester--v18296/)
 ![cv2-wt-gansevoort-the-chester](/public/images/cv2-wt-gansevoort-the-chester.png)
 
-[Holiday Inn Montego Main Pool](https://www.[Oyster.com](https://www.oyster.com)/jamaica/hotels/holiday-inn-resort-montego-bay/all-tours/main-pool--v24936/)
+[Holiday Inn Montego Main Pool](https://www.oyster.com/jamaica/hotels/holiday-inn-resort-montego-bay/all-tours/main-pool--v24936/)
 ![cv2-wt-holiday-inn-montego-main-pool](/public/images/cv2-wt-holiday-inn-montego-main-pool.png)
 
-[Refinery Hotel Rooftop](https://www.[Oyster.com](https://www.oyster.com)/new-york-city/hotels/the-refinery-hotel/all-tours/refinery-rooftop--v19460/)
+[Refinery Hotel Rooftop](https://www.oyster.com/new-york-city/hotels/the-refinery-hotel/all-tours/refinery-rooftop--v19460/)
 ![cv2-wt-refinery-hotel-rooftop](/public/images/cv2-wt-refinery-hotel-rooftop.png)
 
-[Scrub Island North Beach](https://www.[Oyster.com](https://www.oyster.com)/virgin-islands/hotels/scrub-island-resort-spa-and-marina-autograph-collection/all-tours/north-beach--v25717/)
+[Scrub Island North Beach](https://www.oyster.com/virgin-islands/hotels/scrub-island-resort-spa-and-marina-autograph-collection/all-tours/north-beach--v25717/)
 ![cv2-wt-scrub-island-north-beach](/public/images/cv2-wt-scrub-island-north-beach.png)
 
-[Trump Soho Penthouse](https://www.[Oyster.com](https://www.oyster.com)/new-york-city/hotels/trump-soho-new-york/all-tours/penthouse-suite--v24773/)
-
+[Trump Soho Penthouse](https://www.oyster.com/new-york-city/hotels/trump-soho-new-york/all-tours/penthouse-suite--v24773/)
 ![cv2-wt-trump-soho-penthouse](/public/images/cv2-wt-trump-soho-penthouse.png)
 
 
