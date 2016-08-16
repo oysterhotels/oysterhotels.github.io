@@ -1,6 +1,8 @@
-title: Ben Hoyt
-description: "Ben Hoyt's personal website"
-url: http://benhoyt.com/
+title: Oyster.com Tech Blog
+description: "Insights from Oyster.com's Engineering Team"
+tagline: "Insights from our engineering team"
+url: http://tech.oyster.com/
+paginate: 5
 
 # Defaults set by GitHub, only need for local serving
 # https://help.github.com/articles/configuring-jekyll/
