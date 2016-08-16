@@ -163,7 +163,7 @@ So far we have presented a complete workflow to generate virtual tours automatic
 
 In this post, we have presented the complete workflow to create virtual tour using Computer Vision techniques, using local feature matching and epipolar geometry. We also discussed some practical notes about implementing such system for production scale. Together with HDR panoramas that we presented in [Part 1](http://tech.[Oyster.com](https://www.oyster.com)/computer-vision-part-1-hdr-panorama), we can create high quality virtual tours to boost up user experience and engagement on our sites. Again, if you have not checked out our previous part where we talked about how High Dynamic Range panoramas are created at large scale, please [check it out](http://tech.[Oyster.com](https://www.oyster.com)/computer-vision-part-1-hdr-panorama), in the next and last part of this Computer Vision series, we will show you how to integrate smart features like mini-maps or dynamic mouse arrows into your virtual tours. 
 
-Here are some of the virtual tours generated from the approach we just described.
+Here are some of the virtual tours generated from the approach we just described, the links above each screenshot will lead you to our live walkthroughs on Oyster.com, with support for both desktop and mobile.
 
 [Dream Downtown Lobby](https://www.[Oyster.com](https://www.oyster.com)/new-york-city/hotels/dream-downtown/all-tours/lobby--v22596/)
 ![cv2-wt-dream-downtown-lobby](/public/images/cv2-wt-dream-downtown-lobby.png)
