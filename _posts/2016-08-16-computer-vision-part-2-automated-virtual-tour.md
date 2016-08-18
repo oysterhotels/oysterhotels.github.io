@@ -4,7 +4,7 @@ author: Tuan
 layout: post
 permalink: /computer-vision-part-2-automated-virtual-tour/
 disqus_page_identifier: computer-vision-part-2-automated-virtual-tour
-published: false
+published: true
 ---
 
 ![HDR Panorama](/public/images/cv2-cover.png)
