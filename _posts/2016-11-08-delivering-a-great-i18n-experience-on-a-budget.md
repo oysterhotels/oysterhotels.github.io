@@ -9,7 +9,7 @@ published: false
 
 Here at Oyster we have a ton of written content. We cover over 15,000 hotels with written reviews, but beyond that we have around 3,500 blog articles, 1,500 'best of' lists, and over 1,000 other documents including our fakeouts, photo slideshows, and travel guides. That is a LOT of words - 17.4 million to be more precise.
 
-Our engineering problem has been making all of that content available to a much wider audience than just those who can understand English. The first part of tackling that problem is getting that content translated. However, it's not as simple as just sending those 17.4 million words to a translation service. There are many factors to consider.
+Our engineering problem has been making all of that content available to a much wider audience than just those who can understand English. The first part of tackling that problem is getting that content translated. However, it's not as simple as just sending those 17.4 million words to a translation service. There are many factors to consider:
 
 1. Our content changes over time. In total, our documents number around 22,000 but our revisions over time amount to around 325,000! The good thing about that is, a lot of that content is duplicated as drafts evolve and only a portion is published. But, as published documents change, we still have to make sure either our translations get updated or they don't break!
 
