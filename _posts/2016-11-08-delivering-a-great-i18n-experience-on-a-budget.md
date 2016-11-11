@@ -4,7 +4,7 @@ author: John
 layout: post
 permalink: /delivering-a-great-i18n-experience-on-a-budget/
 disqus_page_identifier: delivering-a-great-i18n-experience-on-a-budget
-published: true
+published: false
 ---
 
 Here at Oyster we have a ton of written content. We cover over 15,000 hotels with written reviews, but beyond that we have around 3,500 blog articles, 1,500 'best of' lists, and over 1,000 other documents including our fakeouts, photo slideshows, and travel guides. That is a LOT of words - 17.4 million to be more precise.
