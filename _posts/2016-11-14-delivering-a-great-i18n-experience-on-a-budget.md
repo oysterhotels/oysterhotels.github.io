@@ -22,7 +22,7 @@ Our engineering problem has been making all of that content available to a much 
 These factors led us to build a solution that provides all these features - translations are based on revisions so we can update different languages independently, they can be of different quality/price, there can be multiple translations of the same revision/language but of different quality and merged together, and translations can be full or partial.
 
 Translations table (sample rows)
-![German visits](/public/images/translations.PNG)
+![German visits](/public/images/translations2.PNG)
 
 That is a LOT of moving parts on the backend but it has allowed us to be very flexible and picky with what and how we translate our content. We've managed to get by with only translating around 10% of our documents, of which around only half of those are full translations and the rest are partial. The other 90% is mostly machine translated, but we're constantly striving to lower that number or find other solutions. The cost of this is a rather complex data structure and system to handle all the details needed to put these parts together. We've managed this by streamlining our translation process and consolidating the logic as much as possible.
 
