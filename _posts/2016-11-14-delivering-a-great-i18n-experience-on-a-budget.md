@@ -30,7 +30,7 @@ That is why in addition to this system for handling hotel reviews and articles, 
 
 Earlier this year, we optimized our i18n experience even further on [de.oyster.com](https://de.oyster.com) as a test bed by choosing not to go the machine translation route but instead, selectively hide content. We decided to hide all machine or untranslated blog articles and travel guides because we felt that those low quality translations might be interfering with the rest of our content from both a user experience and SEO perspective. At the same time, we almost tripled the number of documents we have translated to German, even though that still only brought us up to around 13%. The hard part about that was determining exactly which hotels and documents to translate which was a whole other problem that our data scientist was charged with tackling. Fortunately it seems these changes paid off well as our de.oyster.com SEO traffic growth is far outpacing the US site (see below).
 
-![Organic search YTD growth](/public/images/ytd_de_us.PNG)
+![Organic search YTD growth](/public/images/ytd_de_us.png)
 
 
 Normal traffic patterns for a travel site are: 
