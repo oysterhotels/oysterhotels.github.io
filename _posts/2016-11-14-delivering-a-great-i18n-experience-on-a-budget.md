@@ -4,7 +4,7 @@ author: John
 layout: post
 permalink: /delivering-a-great-i18n-experience-on-a-budget/
 disqus_page_identifier: delivering-a-great-i18n-experience-on-a-budget
-published: false
+published: true
 ---
 
 Here at Oyster we have a ton of written content. We cover over 15,000 hotels with written reviews, but beyond that we have around 3,500 blog articles, 1,500 'best of' lists, and over 1,000 other documents including our fakeouts, photo slideshows, and travel guides. That is a LOT of words - 17.4 million to be more precise.
@@ -28,9 +28,16 @@ That is a LOT of moving parts on the backend but it has allowed us to be very fl
 
 That is why in addition to this system for handling hotel reviews and articles, we have a separate system for translating and displaying text that is part of our UI. For translating, we automate sending requests to [Gengo](https://www.gengo.com) through their API and for display we use standard [gettext](https://en.wikipedia.org/wiki/Gettext). This solution works very well for text that is static and highly visible - just always translate it at high quality. Fortunately, our UI text at 40,000 words is only 0.2% the size of our document text!
 
-Earlier this year, we optimized our i18n experience even further on [de.oyster.com](https://de.oyster.com) as a test bed by choosing not to go the machine translation route but instead, selectively hide content. We decided to hide all machine or untranslated blog articles and travel guides because we felt that those low quality translations might be interfering with the rest of our content from both a user experience and SEO perspective. At the same time, we almost tripled the number of documents we have translated to German, even though that still only brought us up to around 13%. The hard part about that was determining exactly which hotels and documents to translate which was a whole other problem that our data scientist was charged with tackling. Fortunately it seems these changes paid off well as our de.oyster.com year over year traffic has grown by over 250% (see below).
+Earlier this year, we optimized our i18n experience even further on [de.oyster.com](https://de.oyster.com) as a test bed by choosing not to go the machine translation route but instead, selectively hide content. We decided to hide all machine or untranslated blog articles and travel guides because we felt that those low quality translations might be interfering with the rest of our content from both a user experience and SEO perspective. At the same time, we almost tripled the number of documents we have translated to German, even though that still only brought us up to around 13%. The hard part about that was determining exactly which hotels and documents to translate which was a whole other problem that our data scientist was charged with tackling. Fortunately it seems these changes paid off well as our de.oyster.com SEO traffic growth is far outpacing the US site (see below).
 
-de.oyster.com Visitors
-![German visits](/public/images/german visitors.PNG)
+![Organic search YTD growth](/public/images/ytd_de_us.PNG)
 
-This is not the end of our i18n work as we have plenty of other existing features and plans to help us bring more of our amazing content to the rest of the world.
+
+Normal traffic patterns for a travel site are: 
+
+* High in January
+* Dip in the spring
+* Highest in the summer
+* Declining for the rest of the year
+
+The US site is showing that trend this year, but the German site has broken away since we made these changes in the spring.  This is not the end of our i18n work as we have plenty of other existing features and plans to help us bring more of our amazing content to the rest of the world.
